@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.YourApp.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/colorBG</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_loading_animation</item>
+        <item name="windowSplashScreenAnimationDuration">1100</item>
+        <item name="postSplashScreenTheme">@style/Theme.RechenMaxRemastered</item>
+    </style>
+</resources>

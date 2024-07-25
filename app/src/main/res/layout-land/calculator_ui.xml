@@ -1,0 +1,2241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RechenMaxUI"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBG"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingBottom="10dp"
+    tools:context=".RechenMaxUI">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="1"
+        android:orientation="vertical"
+        android:rowCount="3">
+
+        <HorizontalScrollView
+            android:id="@+id/calculation_horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="80sp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginHorizontal="12sp">
+
+            <EditText
+                android:id="@+id/calculation_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_rowWeight="0.7"
+                android:layout_marginEnd="16dp"
+                android:text="@string/calculation_text"
+                android:gravity="center_vertical"
+                android:layout_gravity="end|center_vertical"
+                android:textColor="@color/white"
+                android:autofillHints="false"
+                android:inputType="textNoSuggestions"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/quicksand_regular"
+                android:focusableInTouchMode="true"
+                android:windowSoftInputMode="stateHidden"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeStepGranularity="2sp"
+                app:layout_constraintBottom_toTopOf="@+id/result_textview"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/result_horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/result_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="0.7"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.6"
+                android:text="@string/result_text"
+                android:textColor="@color/white"
+                android:textSize="38sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/quicksand_regular"
+                app:layout_constraintBottom_toTopOf="@+id/buttons_grid_layout"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </HorizontalScrollView>
+
+        <GridLayout
+            android:id="@+id/buttons_grid_layout"
+            android:layout_width="match_parent"
+            android:layout_rowWeight="1"
+            android:columnCount="2"
+            android:rowCount="1"
+            android:orientation="horizontal">
+
+            <GridLayout
+                android:id="@+id/scientific_buttons_grid_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:columnCount="1"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific1_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/square_root_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/square_root_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/square_root"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_square_root"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/factorial_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/factorial_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/factorial"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_factorial"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/power_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/power_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/power"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_power"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/percentage_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/percentage_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/percentage"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_percentage"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/actionbar_scientic_mode_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/actionbar_scientic_mode_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/scientic_mode_degree"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_actionbar_scientic_mode"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific2_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/qubic_root_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/qubic_root_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/qubic_root"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_qubic_root"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/log_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/log_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/log"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_log"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/semicolon_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/semicolon_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/semicolon"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_semicolon"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/eulers_number_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/eulers_number_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/eulers_number"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_eulers_number"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/pi_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/pi_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/pi"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_pi"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific3_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/sine_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/sine_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/sine"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_sine"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cosine_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/cosine_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/cosine"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_cosine"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/tangent_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/tangent_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/tangent"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_tangent"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/permutation_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/permutation_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/permutation"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_permutation"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/combination_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/combination_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_combination"
+                            android:gravity="center"
+                            android:text="@string/combination"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific4_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/a_sine_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/a_sine_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/a_sine"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_a_sine"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/a_cosine_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/a_cosine_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/a_cosine"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_a_cosine"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/a_tangent_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/a_tangent_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/a_tangent"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_a_tangent"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/rectangular_to_polar_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/rectangular_to_polar_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/rectangular_to_polar"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_rectangular_to_polar"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/polar_to_rectangular_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/polar_to_rectangular_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_polar_to_rectangular"
+                            android:gravity="center"
+                            android:text="@string/polar_to_rectangular"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific5_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/sine_h_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/sine_h_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/sine_h"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_sine_h"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cosine_h_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/cosine_h_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/cosine_h"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_cosine_h"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/tangent_h_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/tangent_h_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/tangent_h"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_tangent_h"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/log2_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/log2_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/log2"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_log2"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/ln_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/ln_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_ln"
+                            android:gravity="center"
+                            android:text="@string/ln"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific6_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/a_sine_h_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/a_sine_h_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/a_sine_h"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_a_sine_h"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/a_cosine_h_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/a_cosine_h_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/a_cosine_h"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_a_cosine_h"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/a_tangent_h_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/a_tangent_h_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/a_tangent_h"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_a_tangent_h"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/random_integer_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/random_integer_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/random_integer"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_random_integer" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/random_number_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/random_number_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_random_number"
+                            android:gravity="center"
+                            android:text="@string/random_number"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific7_"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="3dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/half_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/half_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/half"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_half"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/third_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/third_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/third"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_third"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/quarter_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/quarter_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/quarter"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_quarter"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fifth_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/fifth_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_fifth"
+                            android:gravity="center"
+                            android:text="@string/fifth"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/tenth_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/tenth_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/tenth"
+                            android:textColor="@color/white"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="12sp"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_logx"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_scientific8"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_a_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_a_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_a"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_a"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_b_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_b_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_b"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_b"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_c_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_c_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_c"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_c"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_d_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_d_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_d"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_d"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_e_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_e_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_e"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_e"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_f_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_f_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_f"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_f"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_g_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_g_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_g"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_g"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_x_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_x_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_x"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_x"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_y_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_y_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_y"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_y"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/variable_z_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium2"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/variable_z_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:gravity="center"
+                            android:text="@string/variable_z"
+                            android:textColor="@color/white"
+                            android:tooltipText="@string/tooltip_variable_z"
+                            app:autoSizeMaxTextSize="50sp"
+                            app:autoSizeStepGranularity="2sp"
+                            app:autoSizeTextType="uniform"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/normal_buttons_grid_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_columnWeight="1"
+                android:columnCount="1"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/clipboard_row_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="0.8"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calculation_edittext">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/clear_clipboard_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonClipboard"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/clear_clipboard_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/clear_clipboard"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_clear_clipboard"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/paste_clipboard_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonClipboard"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/paste_clipboard_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/paste_clipboard"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_paste_clipboard"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/copy_to_clipboard_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonClipboard"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/copy_to_clipboard_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/copy_to_clipboard"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_save_to_clipboard"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clipboard_row_layout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/clear_all_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/clear_all_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:gravity="center"
+                            android:text="@string/clear_all"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_clear_all"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/add_parentheses_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/add_parentheses_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/add_parentheses"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_add_parentheses"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/backspace_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonMedium"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/backspace_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/delete_last_char"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_delete_last_char"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/divide_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/divide_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/divide"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_divide"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_row_layout_1">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/seven_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/seven_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_seven"
+                            android:gravity="center"
+                            android:text="@string/seven"
+                            android:textColor="@color/white"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/eight_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/eight_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/eight"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_eight"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/nine_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/nine_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/nine"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_nine"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/multiply_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/multiply_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/multiply"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_multiply"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_row_layout_2">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/four_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/four_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/four"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_four"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/five_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/five_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/five"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_five"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/six_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/six_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/six"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_six"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/subtract_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/subtract_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/subtract"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_subtract"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_row_layout_3">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/one_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/one_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/one"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_one"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/two_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/two_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/two"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_two"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/three_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/three_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/three"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_three"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/add_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/add_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/add"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_add"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row_layout_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_row_layout_4">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/negate_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/negate_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/negate"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_negate"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/zero_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/zero_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/zero"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_zero"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/comma_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="2dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonLow"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/comma_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/comma"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_comma"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/calculate_card"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/colorButtonCalculation"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <TextView
+                            android:id="@+id/calculate_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/calculate"
+                            android:textColor="@color/white"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="20sp"
+                            android:autoSizeMaxTextSize="50sp"
+                            android:autoSizeStepGranularity="2sp"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:tooltipText="@string/tooltip_calculate"
+                            app:cornerRadius="12dp" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </GridLayout>
+
+        </GridLayout>
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

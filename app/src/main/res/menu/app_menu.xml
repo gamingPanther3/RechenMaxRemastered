@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/actionbar_menu_settings_item"
+        android:title="@string/actionbar_menu_settings"
+        android:onClick="openSettings" />
+
+    <item
+        android:id="@+id/actionbar_menu_clear_history_item"
+        android:title="@string/actionbar_menu_clear_history"
+        android:onClick="clearHistory" />
+
+    <item
+        android:id="@+id/actionbar_menu_help_item"
+        android:title="@string/actionbar_menu_help"
+        android:onClick="openHelp" />
+
+    <item
+        android:id="@+id/actionbar_menu_about_item"
+        android:title="@string/actionbar_menu_about"
+        android:onClick="openAbout" />
+</menu>

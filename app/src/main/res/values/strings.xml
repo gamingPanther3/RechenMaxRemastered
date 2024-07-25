@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">RechenMax</string>
+    <string name="app_version_value" translatable="false">v2.02.0139</string>
+    <string name="app_version" translatable="false">Version - v2.02.0139</string>
+
+    <string name="result_text" translatable="false"></string> <!-- 1246,89 -->
+    <string name="calculation_text" translatable="false"></string> <!-- 1253×52,4 -->
+
+    <string name="clear_clipboard" translatable="false">MC</string>
+    <string name="paste_clipboard" translatable="false">MR</string>
+    <string name="copy_to_clipboard" translatable="false">MS</string>
+
+    <string name="sine" translatable="false">sin</string>
+    <string name="cosine" translatable="false">cos</string>
+    <string name="tangent" translatable="false">tan</string>
+    <string name="a_sine" translatable="false">sin⁻¹</string>
+    <string name="a_cosine" translatable="false">cos⁻¹</string>
+    <string name="a_tangent" translatable="false">tan⁻¹</string>
+    <string name="sine_h" translatable="false">sinh</string>
+    <string name="cosine_h" translatable="false">cosh</string>
+    <string name="tangent_h" translatable="false">tanh</string>
+    <string name="a_sine_h" translatable="false">sinh⁻¹</string>
+    <string name="a_cosine_h" translatable="false">cosh⁻¹</string>
+    <string name="a_tangent_h" translatable="false">tanh⁻¹</string>
+    <string name="eulers_number" translatable="false">е</string>
+    <string name="pi" translatable="false">π</string>
+    <string name="log" translatable="false">log</string>
+    <string name="log2" translatable="false">log₂</string>
+    <string name="logx" translatable="false">logₓ</string>
+    <string name="ln" translatable="false">ln</string>
+    <string name="half" translatable="false">½</string>
+    <string name="third" translatable="false">⅓</string>
+    <string name="quarter" translatable="false">¼</string>
+    <string name="fifth" translatable="false">⅕</string>
+    <string name="tenth" translatable="false">⅒</string>
+    <string name="permutation" translatable="false">nPr</string>
+    <string name="combination" translatable="false">nCr</string>
+    <string name="percentage" translatable="false">%</string>
+    <string name="semicolon" translatable="false">;</string>
+    <string name="random_integer" translatable="false">RanInt</string>
+    <string name="random_number" translatable="false">Ran#</string>
+    <string name="rectangular_to_polar" translatable="false">Pol</string>
+    <string name="polar_to_rectangular" translatable="false">Rec</string>
+    <string name="add_parentheses" translatable="false">( )</string>
+    <string name="factorial" translatable="false">x!</string>
+    <string name="power" translatable="false">^</string>
+    <string name="square_root" translatable="false">√x</string>
+    <string name="qubic_root" translatable="false">³√x</string>
+    <string name="clear_all" translatable="false">AC</string>
+    <string name="delete_last_char" translatable="false">⌫</string>
+    <string name="add" translatable="false">+</string>
+    <string name="subtract" translatable="false">-</string>
+    <string name="multiply" translatable="false">×</string>
+    <string name="divide" translatable="false">÷</string>
+    <string name="calculate" translatable="false">=</string>
+    <string name="comma" translatable="false">,</string>
+    <string name="negate" translatable="false">⁺/₋</string>
+
+    <string name="sine_" translatable="false">sin(</string>
+    <string name="cosine_" translatable="false">cos(</string>
+    <string name="tangent_" translatable="false">tan(</string>
+    <string name="a_sine_" translatable="false">sin⁻¹(</string>
+    <string name="a_cosine_" translatable="false">cos⁻¹(</string>
+    <string name="a_tangent_" translatable="false">tan⁻¹(</string>
+    <string name="sine_h_" translatable="false">sinh(</string>
+    <string name="cosine_h_" translatable="false">cosh(</string>
+    <string name="tangent_h_" translatable="false">tanh(</string>
+    <string name="a_sine_h_" translatable="false">sinh⁻¹(</string>
+    <string name="a_cosine_h_" translatable="false">cosh⁻¹(</string>
+    <string name="a_tangent_h_" translatable="false">tanh⁻¹(</string>
+    <string name="eulers_number_" translatable="false">е</string>
+    <string name="pi_" translatable="false">π</string>
+    <string name="log_" translatable="false">log(</string>
+    <string name="log2_" translatable="false">log₂(</string>
+    <string name="logx_" translatable="false">log</string>
+    <string name="ln_" translatable="false">ln(</string>
+    <string name="half_" translatable="false">½</string>
+    <string name="third_" translatable="false">⅓</string>
+    <string name="quarter_" translatable="false">¼</string>
+    <string name="fifth_" translatable="false">⅕</string>
+    <string name="tenth_" translatable="false">⅒</string>
+    <string name="permutation_" translatable="false">Ƥ</string>
+    <string name="combination_" translatable="false">С</string>
+    <string name="percentage_" translatable="false">%</string>
+    <string name="semicolon_" translatable="false">;</string>
+    <string name="random_integer_" translatable="false">RanInt(</string>
+    <string name="random_number_" translatable="false">Ran#</string>
+    <string name="rectangular_to_polar_" translatable="false">Pol(</string>
+    <string name="polar_to_rectangular_" translatable="false">Rec(</string>
+    <!-- <string name="add_parentheses" translatable="false">( )</string> -->
+    <string name="factorial_" translatable="false">!</string>
+    <string name="power_" translatable="false">^</string>
+    <string name="square_root_" translatable="false">√(</string>
+    <string name="qubic_root_" translatable="false">³√(</string>
+    <!-- <string name="clear_all" translatable="false">AC</string> -->
+    <!-- <string name="delete_last_char" translatable="false">⌫</string> -->
+    <string name="add_" translatable="false">+</string>
+    <string name="subtract_" translatable="false">-</string>
+    <string name="multiply_" translatable="false">×</string>
+    <string name="divide_" translatable="false">÷</string>
+    <!-- <string name="calculate" translatable="false">=</string> -->
+    <string name="comma_" translatable="false">,</string>
+    <!-- <string name="negate" translatable="false">⁺/₋</string> -->
+
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
+    <string name="three" translatable="false">3</string>
+    <string name="four" translatable="false">4</string>
+    <string name="five" translatable="false">5</string>
+    <string name="six" translatable="false">6</string>
+    <string name="seven" translatable="false">7</string>
+    <string name="eight" translatable="false">8</string>
+    <string name="nine" translatable="false">9</string>
+    <string name="zero" translatable="false">0</string>
+
+    <string name="variable_a" translatable="false">A</string>
+    <string name="variable_b" translatable="false">B</string>
+    <string name="variable_c" translatable="false">C</string>
+    <string name="variable_d" translatable="false">D</string>
+    <string name="variable_e" translatable="false">E</string>
+    <string name="variable_f" translatable="false">F</string>
+    <string name="variable_g" translatable="false">G</string>
+    <string name="variable_x" translatable="false">X</string>
+    <string name="variable_y" translatable="false">Y</string>
+    <string name="variable_z" translatable="false">Z</string>
+
+    <string name="tooltip_variable_a" translatable="false">1</string>
+    <string name="tooltip_variable_b" translatable="false">2</string>
+    <string name="tooltip_variable_c" translatable="false">3</string>
+    <string name="tooltip_variable_d" translatable="false">4</string>
+    <string name="tooltip_variable_e" translatable="false">5</string>
+    <string name="tooltip_variable_f" translatable="false">6</string>
+    <string name="tooltip_variable_g" translatable="false">7</string>
+    <string name="tooltip_variable_x" translatable="false">8</string>
+    <string name="tooltip_variable_y" translatable="false">9</string>
+    <string name="tooltip_variable_z" translatable="false">10</string>
+
+    <string name="scientic_mode_degree" translatable="false">Deg</string>
+    <string name="scientic_mode_radians" translatable="false">Rad</string>
+
+    <string name="actionbar_converter" translatable="false">Convert</string>
+    <string name="actionbar_history" translatable="false">History</string>
+    <string name="actionbar_settings" translatable="false">⋮</string>
+
+    <string name="dropdown_arrow_down" translatable="false">˅</string>
+    <string name="dropdown_arrow_up" translatable="false">˄</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Später übersetzen -->
+
+    <string name="tooltip_clear_clipboard">Zwischenablage leeren</string>
+    <string name="tooltip_paste_clipboard">Zwischenablage einfügen</string>
+    <string name="tooltip_save_to_clipboard">Zur Zwischenablage hinzufügen</string>>
+
+    <string name="tooltip_square_root">Quadratwurzel (√(x))</string>
+    <string name="tooltip_factorial">Fakultät (n!)</string>
+    <string name="tooltip_power">Potenz (x^y)</string>
+    <string name="tooltip_percentage">n Prozent von x (x%×n) / n sind y Prozent von x (x%÷n)</string>
+    <string name="tooltip_dropdown_button">Wissenschaftlichen Modus aktivieren / deaktivieren</string>
+    <string name="tooltip_qubic_root">Kubikwurzel (³√(x))</string>
+    <string name="tooltip_log">Logarithmus (log(x))</string>
+    <string name="tooltip_semicolon">Semikolon (;)</string>
+    <string name="tooltip_eulers_number">Eulersche Zahl (e ≈ 2.71828…)</string>
+    <string name="tooltip_pi">PI (π ≈ 3.14159…)</string>
+    <string name="tooltip_sine">Sinus (sin(x))</string>
+    <string name="tooltip_cosine">Cosinus (cos(x))</string>
+    <string name="tooltip_tangent">Tangens (tan(x))</string>
+    <string name="tooltip_permutation">Permutation (49Ƥ6)</string>
+    <string name="tooltip_combination">Kombination (49С6)</string>
+    <string name="tooltip_a_sine">Arkussinus (sin⁻¹(x))</string>
+    <string name="tooltip_a_cosine">Arkuscosinus (cos⁻¹(x))</string>
+    <string name="tooltip_a_tangent">Arkustangens (tan⁻¹(x))</string>
+    <string name="tooltip_rectangular_to_polar">Rechteckkoordinaten zu Polarkoordinaten (Pol(r;θ))</string>
+    <string name="tooltip_polar_to_rectangular">Polarkoordinaten zu Rechteckkoordinaten (Rec(x;y))</string>
+    <string name="tooltip_sine_h">Hyperbolischer Sinus (sinh(x))</string>
+    <string name="tooltip_cosine_h">Hyperbolischer Cosinus (cosh(x))</string>
+    <string name="tooltip_tangent_h">Hyperbolischer Tangens (tanh(x))</string>
+    <string name="tooltip_log2">Logarithmus zur Basis 2 (log₂(x))</string>
+    <string name="tooltip_ln">natürlicher Logarithmus (ln(x))</string>
+    <string name="tooltip_a_sine_h">Hyperbolischer Arkussinus (sinh⁻¹(x))</string>
+    <string name="tooltip_a_cosine_h">Hyperbolischer Arkuscosinus (cosh⁻¹(x))</string>
+    <string name="tooltip_a_tangent_h">Hyperbolischer Arkustangens (tanh⁻¹(x))</string>
+    <string name="tooltip_random_integer">Zufällige ganze Zahl von n bis m (RanInt(n;m))</string>
+    <string name="tooltip_random_number">Zufällige Zahl bis n (nRan#)</string>
+    <string name="tooltip_logx">Logarithmus zur Basis x (logₓ(x))</string>
+    <string name="tooltip_half">Halb (½)</string>
+    <string name="tooltip_third">Drittel (⅓)</string>
+    <string name="tooltip_quarter">Viertel (¼)</string>
+    <string name="tooltip_fifth">Fünftel (⅕)</string>
+    <string name="tooltip_tenth">Zehntel (⅒)</string>
+
+    <string name="tooltip_clear_all">Ergebnis und Berechnung löschen</string>
+    <string name="tooltip_add_parentheses">Klammern hinzufügen</string>
+    <string name="tooltip_delete_last_char">Letzte Zeichen löschen</string>
+    <string name="tooltip_divide">Dividieren</string>
+    <string name="tooltip_seven">Sieben</string>
+    <string name="tooltip_eight">Acht</string>
+    <string name="tooltip_nine">Neun</string>
+    <string name="tooltip_multiply">Multiplizieren</string>
+    <string name="tooltip_four">Vier</string>
+    <string name="tooltip_five">Fünf</string>
+    <string name="tooltip_six">Sechs</string>
+    <string name="tooltip_subtract">Subtrahieren</string>
+    <string name="tooltip_one">Eins</string>
+    <string name="tooltip_two">Zwei</string>
+    <string name="tooltip_three">Drei</string>
+    <string name="tooltip_add">Addieren</string>
+    <string name="tooltip_negate">Negieren</string>
+    <string name="tooltip_zero">Null</string>
+    <string name="tooltip_comma">Komma</string>
+    <string name="tooltip_calculate">Berechnen</string>
+
+    <string name="tooltip_actionbar_scientic_mode">Gradmaß (Deg) und Bogenmaß (Rad)</string>
+    <string name="tooltip_actionbar_converter">Einheiten Umrechner</string>
+    <string name="tooltip_actionbar_history">Verlauf</string>
+    <string name="tooltip_actionbar_settings">Einstellungen</string>
+    <string name="tooltip_actionbar_menu">Menü</string>
+
+    <string name="actionbar_menu_settings">Einstellungen</string>
+    <string name="actionbar_menu_clear_history">Verlauf leeren</string>
+    <string name="actionbar_menu_help">Hilfe</string>
+    <string name="actionbar_menu_about">Über</string>
+    <string name="actionbar_menu_change_variables">Variablen definieren</string>
+    <string name="actionbar_function_is_not_available">Diese Funktion ist noch nicht verfügbar</string>
+
+    <string name="errorMessage1">Wert zu groß</string>
+    <string name="errorMessage2">Syntax Fehler</string>
+    <string name="errorMessage3">Kein Teilen durch 0</string>
+    <string name="errorMessage4">Nur reelle Zahlen</string>
+    <string name="errorMessage5">Unbekannter Operator</string>
+    <string name="errorMessage6">Domainfehler</string>
+    <string name="errorMessage7">Ungültiges Zahlenformat</string>
+    <string name="errorMessage8">Nicht definiert</string>
+    <string name="errorMessage9">Ungültiger Wert</string>
+    <string name="errorMessage10">Ungültige Eingabe</string>
+    <string name="errorMessage11">Unendlich</string>
+    <string name="errorMessage12">For input string</string>
+    <string name="errorMessage13">Kein Teilen</string>
+    <string name="errorMessage14">Unbekannte Funktion</string>
+    <string name="errorMessage15">Ungültiges Argument</string>
+    <string name="errorMessage16">Ungültige Basis</string>
+    <string name="errorMessage17">Ungültige Basis oder Argument</string>
+    <string name="errorMessage18">k darf nicht größer als n sein</string>
+    <string name="errorMessage19">Nenner darf nicht 0 sein</string>
+    <string name="errorMessage20">n muss größer als 0 sein</string>
+    <string name="errorMessage21">n darf nicht 0 sein</string>
+    <string name="errorMessage22">Character</string>
+
+    <string name="inAppUpdateCanceledByUser">Update vom Benutzer abgebrochen</string>
+    <string name="inAppUpdateDownloaded">Ein Update wurde gerade heruntergeladen</string>
+    <string name="inAppUpdateRestart">Neustarten</string>
+
+    <string name="inAppReviewCouldntStart">Die Rezension konnte nicht gestartet werden</string>
+    <string name="inAppReviewFinished">Bewertung abgeschlossen</string>
+
+    <string name="clipboardCleared">Zwischenablage geleert …</string>
+    <string name="clipboardIsEmpty">Zwischenablage enthält keine Daten …</string>
+    <string name="pastedClipboard">Zwischenablage wurde eingefügt …</string>
+    <string name="copiedToClipboard">Berechnung wurde kopiert …</string>
+
+    <string name="menu_about">Über RechenMax</string>
+    <string name="about_category_help">Unterstütze mich</string>
+    <string name="about_help_donate">Spenden</string>
+    <string name="about_help_rate">App bewerten</string>
+    <string name="about_rate_thank_you">Vielen Dank für deine Bewertung</string>
+    <string name="about_rate_error_message">Ein Fehler ist aufgetreten</string>
+    <string name="about_category_social">Social</string>
+    <string name="about_social_github">GitHub</string>
+    <string name="about_email_address">ml.programs.service@gmail.com</string>
+    <string name="category_info">App-Infos</string>
+    <string name="about_other_license">Apache License, Version 2.0</string>
+    <string name="about_other_privacy_policy">Datenschutzerklärung</string>
+    <string name="about_made_in_germany">Mit ❤️ in Deutschland entwickelt.</string>
+
+
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_general">Allgemein</string>
+    <string name="settings_language">Sprache</string>
+    <string name="settings_release_notes">Release Notes</string>
+    <string name="settings_buttons">Knöpfe und Anzeigen</string>
+    <string name="settings_insert_pi">PI einfügen</string>
+    <string name="settings_notification">Benachrichtigungen</string>
+    <string name="settings_decimal_points">Nachkommastellen</string>
+    <string name="settings_report_error">Fehler melden</string>
+    <string name="settings_reminder">Erinnerungen</string>
+    <string name="settings_daily_hints">Tägliche Tipps</string>
+
+    <string name="about_no_email_client">Es ist kein E-Mail-Client installiert. (Email-Adresse kopiert)</string>
+
+    <string name="variable_is_not_defined">Variable ist nicht definiert</string>
+    <string name="variable_is_now_defined">Variable ist nun definiert (\'</string>
+    <string name="variable_is_now_undefined">Variable wurde entfernt</string>
+    <string name="variable_cannot_contain_itself">Variable darf nicht sich selbst enthalten</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorButtonCalculation">#D9824B</color>
+    <color name="colorButtonClipboard">#5464B0</color>
+
+    <color name="colorPrimary">#4B5EFC</color>
+    <color name="colorButtonVeryHigh">#C4C4C4</color>
+    <color name="colorButtonHigh">#6E787F</color>
+    <color name="colorButtonMedium">#4E585F</color>
+    <color name="colorButtonMedium2">#3e434b</color>
+    <color name="colorButtonLow">#2E2F38</color>
+    <color name="colorButtonActionbar">#25262B</color>
+    <color name="colorBG">#17171C</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

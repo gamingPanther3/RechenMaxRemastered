@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBG"
+    android:id="@+id/settingsUI"
+    tools:context=".SettingsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".settingsActivity">
+
+        <ImageView
+            android:id="@+id/settings_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_baseline_arrow_back"
+            android:layout_marginVertical="9dp"
+            android:layout_marginHorizontal="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:importantForAccessibility="no" />
+
+        <View
+            android:id="@+id/settings_back_button_hitbox"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="@+id/settings_back_button"
+            app:layout_constraintStart_toStartOf="@+id/settings_back_button"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/settings_back_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="18dp"
+            android:text="@string/settings_title"
+            android:textColor="@color/colorButtonClipboard"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_back_button"
+            app:layout_constraintStart_toEndOf="@+id/settings_back_button"
+            app:layout_constraintTop_toTopOf="@+id/settings_back_button" />
+
+        <TextView
+            android:id="@+id/settings_general"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textStyle="bold"
+            android:text="@string/settings_general"
+            android:textColor="@color/colorButtonClipboard"
+            android:layout_marginHorizontal="60dp"
+            app:layout_constraintTop_toBottomOf="@+id/settings_back_button_text" />
+
+        <TextView
+            android:id="@+id/settings_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorButtonVeryHigh"
+            android:text="@string/settings_language"
+            app:layout_constraintTop_toBottomOf="@+id/settings_general"
+            app:drawableLeftCompat="@drawable/baseline_language_24"
+            android:drawablePadding="20dp"
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/about_text"
+            android:layout_marginHorizontal="15dp"/>
+
+        <TextView
+            android:id="@+id/settings_report_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorButtonVeryHigh"
+            android:text="@string/settings_report_error"
+            app:layout_constraintTop_toBottomOf="@+id/settings_language"
+            app:drawableLeftCompat="@drawable/baseline_report_gmailerrorred_24"
+            android:drawablePadding="20dp"
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/about_text"
+            android:layout_marginHorizontal="15dp"/>
+
+        <View
+            android:id="@+id/category_seperator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/colorButtonActionbar"
+            app:layout_constraintTop_toBottomOf="@+id/settings_report_error" />
+
+        <TextView
+            android:id="@+id/settings_buttons_and_displays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="65dp"
+            android:textStyle="bold"
+            android:text="@string/settings_buttons"
+            android:textColor="@color/colorButtonClipboard"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/category_seperator_1" />
+
+        <TextView
+            android:id="@+id/settings_insert_pi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="12dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/settings_insert_pi"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_content_paste_go_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_buttons_and_displays" />
+
+        <TextView
+            android:id="@+id/settings_decimal_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="12dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/settings_decimal_points"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_numbers_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_insert_pi" />
+
+        <View
+            android:id="@+id/category_seperator_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/colorButtonActionbar"
+            app:layout_constraintTop_toBottomOf="@+id/settings_decimal_points" />
+
+        <TextView
+            android:id="@+id/settings_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="65dp"
+            android:textStyle="bold"
+            android:text="@string/settings_notification"
+            android:textColor="@color/colorButtonClipboard"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/category_seperator_2" />
+
+        <TextView
+            android:id="@+id/settings_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="12dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/settings_reminder"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_timer_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_notification" />
+
+        <TextView
+            android:id="@+id/settings_daily_hints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="12dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/settings_daily_hints"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_today_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_reminder" />
+
+        <View
+            android:id="@+id/category_seperator_3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/colorButtonActionbar"
+            app:layout_constraintTop_toBottomOf="@+id/settings_daily_hints" />
+
+        <TextView
+            android:id="@+id/settings_category_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="60dp"
+            android:text="@string/category_info"
+            android:textColor="@color/colorButtonClipboard"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/category_seperator_3" />
+
+        <TextView
+            android:id="@+id/settings_release_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:text="@string/settings_release_notes"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_event_note_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_category_info" />
+
+        <TextView
+            android:id="@+id/settings_license"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:text="@string/about_other_license"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_policy_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_release_notes" />
+
+        <TextView
+            android:id="@+id/settings_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:text="@string/about_other_privacy_policy"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_private_connectivity_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_license" />
+
+        <TextView
+            android:id="@+id/settings_app_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:drawablePadding="20dp"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:text="@string/app_version"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonVeryHigh"
+            app:drawableLeftCompat="@drawable/baseline_info_outline_24"
+            app:layout_constraintTop_toBottomOf="@+id/settings_privacy_policy" />
+
+        <View
+            android:id="@+id/category_seperator_end"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/colorButtonActionbar"
+            app:layout_constraintTop_toBottomOf="@+id/settings_app_version" />
+
+        <TextView
+            android:id="@+id/settings_settings_made_in_germany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="65dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:text="@string/about_made_in_germany"
+            android:textSize="@dimen/about_text"
+            android:textColor="@color/colorButtonHigh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_seperator_end" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

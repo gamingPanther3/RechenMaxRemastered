@@ -33,7 +33,7 @@
         <activity
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".SettingsActivity"
-            android:configChanges="uiMode"
+            android:configChanges="locale|uiMode"
             android:exported="false">
         </activity>
 

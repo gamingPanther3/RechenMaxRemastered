@@ -5,12 +5,23 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import java.util.Locale;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 
 public class SettingsActivity extends AppCompatActivity {
     private ClipboardManager clipboardManager;
@@ -73,8 +84,49 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+
+
+    // TODO improve this
+    public void openSettingsLanguageConfig(MenuItem item) {
+        TextView actionbarMenuTextview = findViewById(R.id.settings_language);
+        PopupMenu popup = new PopupMenu(this, actionbarMenuTextview);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.settings_language_config, popup.getMenu());
+        popup.show();
+
+
+    }
+
     private void openRechenMaxUI() {
         Intent intent = new Intent(SettingsActivity.this, RechenMaxUI.class);
         startActivity(intent);
+    }
+
+    public void changeLanguageToGerman(MenuItem item) {
+        setLocale("de");
+    }
+
+    public void changeLanguageToEnglish(MenuItem item) {
+        setLocale("en");
+    }
+
+    public void changeLanguageToSpanish(MenuItem item) {
+        setLocale("es");
+    }
+
+    public void changeLanguageToFrench(MenuItem item) {
+        setLocale("fr");
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, SettingsActivity.class);
+        finish();
+        startActivity(refresh);
     }
 }

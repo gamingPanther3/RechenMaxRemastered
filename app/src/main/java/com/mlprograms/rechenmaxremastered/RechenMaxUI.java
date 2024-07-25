@@ -1,6 +1,5 @@
 package com.mlprograms.rechenmaxremastered;
 
-import static com.mlprograms.rechenmaxremastered.CalculatorEngine.containsOperatorOrFunction;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.fixExpression;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.isNumber;
 import static com.mlprograms.rechenmaxremastered.NumberHelper.PI;
@@ -99,7 +98,7 @@ public class RechenMaxUI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calculator_ui);
+        setContentView(R.layout.activity_calculator_ui);
 
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.RechenMaxUI), (v, insets) -> {
@@ -339,7 +338,7 @@ public class RechenMaxUI extends AppCompatActivity {
         TextView actionbarMenuTextview = findViewById(R.id.actionbar_menu_textview);
         PopupMenu popup = new PopupMenu(this, actionbarMenuTextview);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.app_menu, popup.getMenu());
+        inflater.inflate(R.menu.calculator_ui_app_menu, popup.getMenu());
         popup.show();
     }
 

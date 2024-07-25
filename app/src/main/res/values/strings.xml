@@ -306,4 +306,10 @@
     <string name="variable_is_now_undefined">Variable wurde entfernt</string>
     <string name="variable_cannot_contain_itself">Variable darf nicht sich selbst enthalten</string>
 
+    <string name="settings_language_config_german">Deutsch</string>
+    <string name="settings_language_config_english">Englisch</string>
+    <string name="settings_language_config_spanish">Spanisch</string>
+    <string name="settings_language_config_french">Französisch</string>
+
+
 </resources>

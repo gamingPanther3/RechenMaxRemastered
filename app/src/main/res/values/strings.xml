@@ -305,7 +305,7 @@
     <string name="settings_general">Allgemein</string>
     <string name="settings_language">Sprache</string>
     <string name="settings_language_description">Wählen Sie die gewünschte Sprache für die App aus, um Menüs und Benachrichtigungen in dieser Sprache anzuzeigen.</string>
-    <string name="settings_release_notes">Release Notes</string>
+    <string name="settings_changelog">Changelog</string>
     <string name="settings_buttons">Knöpfe und Anzeigen</string>
     <string name="settings_insert_pi">PI einfügen</string>
     <string name="settings_insert_pi_description">Aktivieren Sie diese Option, um beim Eingeben von \'3,14\' in den Taschenrechner automatisch das Zeichen π einzufügen.</string>

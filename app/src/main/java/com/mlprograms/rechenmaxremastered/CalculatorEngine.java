@@ -778,13 +778,13 @@ public class CalculatorEngine {
 
                 // TODO: check if its correct
                 if (
-                        !nextChar.isEmpty() &&
-                        (
-                            (isSymbol(currentChar) && isNumber(nextChar))   ||
-                            (isNumber(currentChar) && isSymbol(nextChar))   ||
-                            (isNumber(currentChar) && nextChar.equals("(")) ||
-                            (currentChar.equals(")") && isNumber(nextChar))
-                        )
+                    !nextChar.isEmpty() &&
+                    (
+                        (isSymbol(currentChar) && isNumber(nextChar))   ||
+                        (isNumber(currentChar) && isSymbol(nextChar))   ||
+                        (isNumber(currentChar) && nextChar.equals("(")) ||
+                        (currentChar.equals(")") && isNumber(nextChar))
+                    )
                 )
 
                 {

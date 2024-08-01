@@ -5,6 +5,7 @@
 
     <color name="colorPrimary">#4B5EFC</color>
     <color name="colorButtonVeryHigh">#C4C4C4</color>
+    <color name="coloNearlyWhite">#BBBBBB</color>
     <color name="colorButtonHigh">#6E787F</color>
     <color name="colorButtonMedium">#4E585F</color>
     <color name="colorButtonMedium2">#3e434b</color>

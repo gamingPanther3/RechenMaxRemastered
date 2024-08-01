@@ -146,7 +146,21 @@
     <string name="dropdown_arrow_down" translatable="false">˅</string>
     <string name="dropdown_arrow_up" translatable="false">˄</string>
 
-
+    <string name="settings_decimal_points_config_1" translatable="false">1</string>
+    <string name="settings_decimal_points_config_2" translatable="false">2</string>
+    <string name="settings_decimal_points_config_3" translatable="false">3</string>
+    <string name="settings_decimal_points_config_4" translatable="false">4</string>
+    <string name="settings_decimal_points_config_5" translatable="false">5</string>
+    <string name="settings_decimal_points_config_6" translatable="false">6</string>
+    <string name="settings_decimal_points_config_7" translatable="false">7</string>
+    <string name="settings_decimal_points_config_8" translatable="false">8</string>
+    <string name="settings_decimal_points_config_9" translatable="false">9</string>
+    <string name="settings_decimal_points_config_10" translatable="false">10</string>
+    <string name="settings_decimal_points_config_11" translatable="false">11</string>
+    <string name="settings_decimal_points_config_12" translatable="false">12</string>
+    <string name="settings_decimal_points_config_13" translatable="false">13</string>
+    <string name="settings_decimal_points_config_14" translatable="false">14</string>
+    <string name="settings_decimal_points_config_15" translatable="false">15</string>
 
 
 
@@ -290,14 +304,20 @@
     <string name="settings_title">Einstellungen</string>
     <string name="settings_general">Allgemein</string>
     <string name="settings_language">Sprache</string>
+    <string name="settings_language_description">Wählen Sie die gewünschte Sprache für die App aus, um Menüs und Benachrichtigungen in dieser Sprache anzuzeigen.</string>
     <string name="settings_release_notes">Release Notes</string>
     <string name="settings_buttons">Knöpfe und Anzeigen</string>
     <string name="settings_insert_pi">PI einfügen</string>
+    <string name="settings_insert_pi_description">Aktivieren Sie diese Option, um beim Eingeben von \'3,14\' in den Taschenrechner automatisch das Zeichen π einzufügen.</string>
     <string name="settings_notification">Benachrichtigungen</string>
     <string name="settings_decimal_points">Nachkommastellen</string>
+    <string name="settings_decimal_points_description">Stellen Sie die Anzahl der Nachkommastellen ein, die im Umrechner angezeigt werden.</string>
     <string name="settings_report_error">Fehler melden</string>
+    <string name="settings_report_error_description">Melden Sie App-Probleme direkt an unser Support-Team, um uns bei der Fehlerbehebung und Verbesserung zu unterstützen.</string>
     <string name="settings_reminder">Erinnerungen</string>
+    <string name="settings_reminder_description">Erhalten Sie Benachrichtigungen, um den Taschenrechner regelmäßig zu nutzen.</string>
     <string name="settings_daily_hints">Tägliche Tipps</string>
+    <string name="settings_daily_hints_description">Erhalten Sie täglich nützliche Tipps zur optimalen Nutzung des Taschenrechners.</string>
 
     <string name="about_no_email_client">Es ist kein E-Mail-Client installiert. (Email-Adresse kopiert)</string>
 
@@ -311,5 +331,17 @@
     <string name="settings_language_config_spanish">Spanisch</string>
     <string name="settings_language_config_french">Französisch</string>
 
+    <string name="settings_insert_pi_set_to">PI wird</string>
+    <string name="settings_insert_pi_insert">eingefügt</string>
+    <string name="settings_insert_pi_not_insert">nicht eingefügt</string>
 
+    <string name="settings_daily_hints_notification_set_to">Tägliche Tipps werden</string>
+    <string name="settings_daily_hints_notification_send">gesendet</string>
+    <string name="settings_daily_hints_notification_do_not_send">nicht gesendet</string>
+
+    <string name="settings_remember_notification_set_to">Erinnerungen werden</string>
+    <string name="settings_remember_notification_send">gesendet</string>
+    <string name="settings_remember_notification_do_not_send">nicht gesendet</string>
+
+    <string name="settings_decimal_points_set_to">Anzahl der Nachkommastellen beträgt nun:</string>
 </resources>

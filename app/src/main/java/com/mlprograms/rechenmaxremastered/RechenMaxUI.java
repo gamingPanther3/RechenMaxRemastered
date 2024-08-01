@@ -95,6 +95,8 @@ public class RechenMaxUI extends AppCompatActivity {
             "%", "×", "÷", "+", "-", "½", "⅓", "¼", "⅕", "⅒", "%×", "%*", "⁒", "π", "е", "E"
     };
 
+    // TODO change language according to settings
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

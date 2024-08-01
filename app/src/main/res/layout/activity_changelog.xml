@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBG"
-    android:id="@+id/settingsUI"
-    tools:context=".SettingsActivity">
+    android:id="@+id/changelogUI"
+    tools:context=".ChangelogActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".settingsActivity">
+        tools:context=".ChangelogActivity">
 
         <ImageView
             android:id="@+id/settings_back_button"

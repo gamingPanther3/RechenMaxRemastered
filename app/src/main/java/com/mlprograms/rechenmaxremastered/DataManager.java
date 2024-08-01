@@ -415,7 +415,7 @@ public class DataManager {
             initializeSetting("allowRememberNotificationsActive", "true", applicationContext);
             initializeSetting("notificationSent", "false", applicationContext);
             initializeSetting("pressedCalculate", "false", applicationContext);
-            initializeSetting("refactorPI", "true", applicationContext);
+            initializeSetting("refactorPI", "false", applicationContext);
             initializeSetting("historyMode", "single", applicationContext);
             initializeSetting("historyModeAdvanced", "false", applicationContext);
             initializeSetting("dayPassed", "true", applicationContext);

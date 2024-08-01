@@ -22,6 +22,7 @@ import static com.mlprograms.rechenmaxremastered.ParenthesesBalancer.balancePare
 import static ch.obermuhlner.math.big.DefaultBigDecimalMath.pow;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import org.json.JSONException;
 
@@ -173,26 +174,24 @@ public class CalculatorEngine {
             // Evaluate the expression and handle exceptions
             final String[] result = evaluate(tokens);
 
-            if (!tokens.isEmpty() && (tokens.get(tokens.size() - 1).startsWith("Pol(") || tokens.get(tokens.size() - 1).startsWith("Rec("))) {
-                if (tokens.get(tokens.size() - 1).startsWith("Pol(")) {
-                    return  " r="  + rechenmaxUI.formatNumber(result[1].replace(".", ",")) +
-                            "; θ=" + rechenmaxUI.formatNumber(result[0].replace(".", ","));
-                } else {
-                    return  " x="  + rechenmaxUI.formatNumber(result[1].replace(".", ",")) +
-                            "; y=" + rechenmaxUI.formatNumber(result[0].replace(".", ","));
-                }
-            } else {
-                double resultDouble = Double.parseDouble(result[0].replace(",", "."));
-                if (Double.isInfinite(resultDouble)) {
-                    return rechenmaxUI.getString(R.string.errorMessage1);
-                }
+            if (tokens.get(0).equals("Pol(")) {
+                return  " r="  + rechenmaxUI.formatNumber(result[1].replace(".", ",")) +
+                        "; θ=" + rechenmaxUI.formatNumber(result[0].replace(".", ","));
+            } else if (tokens.get(0).equals("Rec(")) {
+                return  " x="  + rechenmaxUI.formatNumber(result[1].replace(".", ",")) +
+                        "; y=" + rechenmaxUI.formatNumber(result[0].replace(".", ","));
+            }
 
-                String finalResult = new BigDecimal(result[0]).stripTrailingZeros().toPlainString().replace('.', ',');
-                if (containsOperatorOrFunction(calculation)) {
-                    return rechenmaxUI.formatNumber(shortedResult(finalResult));
-                } else {
-                    return rechenmaxUI.formatNumber(finalResult);
-                }
+            double resultDouble = Double.parseDouble(result[0].replace(",", "."));
+            if (Double.isInfinite(resultDouble)) {
+                return rechenmaxUI.getString(R.string.errorMessage1);
+            }
+
+            String finalResult = new BigDecimal(result[0]).stripTrailingZeros().toPlainString().replace('.', ',');
+            if (containsOperatorOrFunction(calculation)) {
+                return rechenmaxUI.formatNumber(shortedResult(finalResult));
+            } else {
+                return rechenmaxUI.formatNumber(finalResult);
             }
         } catch (ArithmeticException e) {
             if (Objects.equals(e.getMessage(), rechenmaxUI.getString(R.string.errorMessage1))) {
@@ -349,7 +348,6 @@ public class CalculatorEngine {
      */
     public static String[] evaluate(final List<String> tokens) {
         // Convert the infix expression to postfix
-        // TODO wrong tokens if numbers are too large
         postfixTokens = infixToPostfix(tokens);
         //Log.i("evaluate", "Postfix Tokens: " + postfixTokens);
 

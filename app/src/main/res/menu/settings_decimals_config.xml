@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/settings_decimal_points_1"
+        android:title="@string/settings_decimal_points_config_1"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_2"
+        android:title="@string/settings_decimal_points_config_2"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_3"
+        android:title="@string/settings_decimal_points_config_3"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_4"
+        android:title="@string/settings_decimal_points_config_4"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_5"
+        android:title="@string/settings_decimal_points_config_5"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_6"
+        android:title="@string/settings_decimal_points_config_6"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_7"
+        android:title="@string/settings_decimal_points_config_7"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_8"
+        android:title="@string/settings_decimal_points_config_8"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_9"
+        android:title="@string/settings_decimal_points_config_9"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_10"
+        android:title="@string/settings_decimal_points_config_10"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_11"
+        android:title="@string/settings_decimal_points_config_11"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_12"
+        android:title="@string/settings_decimal_points_config_12"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_13"
+        android:title="@string/settings_decimal_points_config_13"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_14"
+        android:title="@string/settings_decimal_points_config_14"
+        android:onClick="changeDecimalPointsTo" />
+
+    <item
+        android:id="@+id/settings_decimal_points_15"
+        android:title="@string/settings_decimal_points_config_15"
+        android:onClick="changeDecimalPointsTo" />
+
+</menu>

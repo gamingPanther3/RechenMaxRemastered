@@ -31,16 +31,17 @@
             android:layout_height="60dp"
             app:layout_constraintEnd_toEndOf="@+id/settings_back_button"
             app:layout_constraintStart_toStartOf="@+id/settings_back_button"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:onClick="openRechenMaxUI"/>
 
         <TextView
             android:id="@+id/settings_back_button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:paddingVertical="18dp"
+            android:paddingVertical="20dp"
             android:text="@string/settings_title"
-            android:textColor="@color/colorButtonClipboard"
+            android:textColor="@color/colorButtonVeryHigh"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/settings_back_button"
             app:layout_constraintStart_toEndOf="@+id/settings_back_button"
@@ -50,7 +51,7 @@
             android:id="@+id/settings_general"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:text="@string/settings_general"
             android:textColor="@color/colorButtonClipboard"
@@ -68,9 +69,22 @@
             android:drawablePadding="20dp"
             android:paddingVertical="12dp"
             android:gravity="center_vertical"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:layout_marginHorizontal="15dp"
             android:onClick="openSettingsLanguageConfig"/>
+
+        <TextView
+            android:id="@+id/settings_language_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_language_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_language"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
+            android:layout_marginHorizontal="15dp"/>
 
         <TextView
             android:id="@+id/settings_report_error"
@@ -78,12 +92,26 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorButtonVeryHigh"
             android:text="@string/settings_report_error"
-            app:layout_constraintTop_toBottomOf="@+id/settings_language"
+            app:layout_constraintTop_toBottomOf="@+id/settings_language_description"
             app:drawableLeftCompat="@drawable/baseline_report_gmailerrorred_24"
             android:drawablePadding="20dp"
             android:paddingVertical="12dp"
             android:gravity="center_vertical"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
+            android:layout_marginHorizontal="15dp"
+            android:onClick="openEmailAppAndFoundReportError"/>
+
+        <TextView
+            android:id="@+id/settings_report_error_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_report_error_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_report_error"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
             android:layout_marginHorizontal="15dp"/>
 
         <View
@@ -93,7 +121,7 @@
             android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="15dp"
             android:background="@color/colorButtonActionbar"
-            app:layout_constraintTop_toBottomOf="@+id/settings_report_error" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_report_error_description" />
 
         <TextView
             android:id="@+id/settings_buttons_and_displays"
@@ -115,10 +143,24 @@
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
             android:text="@string/settings_insert_pi"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_content_paste_go_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_buttons_and_displays" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_buttons_and_displays"
+            android:onClick="openSettingsInsertPIConfig"/>
+
+        <TextView
+            android:id="@+id/settings_insert_pi_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_insert_pi_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_insert_pi"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
+            android:layout_marginHorizontal="15dp"/>
 
         <TextView
             android:id="@+id/settings_decimal_points"
@@ -129,10 +171,24 @@
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
             android:text="@string/settings_decimal_points"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_numbers_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_insert_pi" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_insert_pi_description"
+            android:onClick="openSettingsDecimalPointsConfig"/>
+
+        <TextView
+            android:id="@+id/settings_decimal_points_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_decimal_points_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_decimal_points"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
+            android:layout_marginHorizontal="15dp"/>
 
         <View
             android:id="@+id/category_seperator_2"
@@ -141,7 +197,7 @@
             android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="15dp"
             android:background="@color/colorButtonActionbar"
-            app:layout_constraintTop_toBottomOf="@+id/settings_decimal_points" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_decimal_points_description" />
 
         <TextView
             android:id="@+id/settings_notification"
@@ -163,10 +219,24 @@
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
             android:text="@string/settings_reminder"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_timer_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_notification" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_notification"
+            android:onClick="openSettingsRememberNotificationConfig"/>
+
+        <TextView
+            android:id="@+id/settings_reminder_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_reminder_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_reminder"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
+            android:layout_marginHorizontal="15dp"/>
 
         <TextView
             android:id="@+id/settings_daily_hints"
@@ -177,10 +247,24 @@
             android:drawablePadding="20dp"
             android:gravity="center_vertical"
             android:text="@string/settings_daily_hints"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_today_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_reminder" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_reminder_description"
+            android:onClick="openSettingsDailyHintsNotificationConfig" />
+
+        <TextView
+            android:id="@+id/settings_daily_hints_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_daily_hints_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_daily_hints"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
+            android:layout_marginHorizontal="15dp"/>
 
         <View
             android:id="@+id/category_seperator_3"
@@ -189,7 +273,7 @@
             android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="15dp"
             android:background="@color/colorButtonActionbar"
-            app:layout_constraintTop_toBottomOf="@+id/settings_daily_hints" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_daily_hints_description" />
 
         <TextView
             android:id="@+id/settings_category_info"
@@ -211,7 +295,7 @@
             android:gravity="center_vertical"
             android:paddingVertical="12dp"
             android:text="@string/settings_release_notes"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_event_note_24"
             app:layout_constraintTop_toBottomOf="@+id/settings_category_info" />
@@ -225,10 +309,11 @@
             android:gravity="center_vertical"
             android:paddingVertical="12dp"
             android:text="@string/about_other_license"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_policy_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_release_notes" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_release_notes"
+            android:onClick="openAppLicenseOnGitHubInBrowser"/>
 
         <TextView
             android:id="@+id/settings_privacy_policy"
@@ -239,10 +324,11 @@
             android:gravity="center_vertical"
             android:paddingVertical="12dp"
             android:text="@string/about_other_privacy_policy"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_private_connectivity_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_license" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_license"
+            android:onClick="openPrivacyPolicyOnGitHubInBrowser"/>
 
         <TextView
             android:id="@+id/settings_app_version"
@@ -253,7 +339,7 @@
             android:gravity="center_vertical"
             android:paddingVertical="12dp"
             android:text="@string/app_version"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_info_outline_24"
             app:layout_constraintTop_toBottomOf="@+id/settings_privacy_policy" />
@@ -276,7 +362,7 @@
             android:gravity="center"
             android:paddingVertical="12dp"
             android:text="@string/about_made_in_germany"
-            android:textSize="@dimen/about_text"
+            android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonHigh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

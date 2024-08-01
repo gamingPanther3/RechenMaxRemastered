@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -16,15 +17,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import java.util.Locale;
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
+import java.util.Objects;
+
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
+import org.json.JSONException;
+
 public class SettingsActivity extends AppCompatActivity {
     private ClipboardManager clipboardManager;
+    DataManager dataManager = new DataManager();
+
+    private boolean oldValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,68 +43,107 @@ public class SettingsActivity extends AppCompatActivity {
             return insets;
         });
 
-        findViewById(R.id.settings_back_button).setOnClickListener(v -> {
-            openRechenMaxUI();
-        });
+        // TODO: display easter egg if button is pressed 12 times
+    }
 
-        // TODO: language
+    // TODO: release notes
 
-        findViewById(R.id.settings_report_error).setOnClickListener(v -> {
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri data;
-                data = Uri.parse("mailto:ml.programs.service@gmail.com?subject=");
-                intent.setData(data);
-                startActivity(intent);
-
-            } catch (android.content.ActivityNotFoundException e) {
-                ToastHelper.showToastLong(getString(R.string.about_no_email_client), getApplicationContext());
-                ClipData clipData = ClipData.newPlainText("", getString(R.string.about_email_address));
-                clipboardManager.setPrimaryClip(clipData);
-            }
-        });
-
-        // TODO: insert pi
-
-        // TODO: decimals
-
-        // TODO: reminder
-
-        // TODO: daily hints
-
-        // TODO: release notes
-
-        findViewById(R.id.settings_license).setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/gamingPanther3/RechenMax/blob/master/LICENSE"));
-            startActivity(browserIntent);
-        });
-
+    public void openPrivacyPolicyOnGitHubInBrowser(View item) {
         findViewById(R.id.settings_privacy_policy).setOnClickListener(v -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://gist.github.com/gamingPanther3/b78ad25eb51d05a020f48efa86f660ad"));
             startActivity(browserIntent);
         });
+    }
 
-        findViewById(R.id.settings_app_version).setOnClickListener(v -> {
-            // TODO: display easter egg if 12 times pressed
+    public void openAppLicenseOnGitHubInBrowser(View item) {
+        findViewById(R.id.settings_license).setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/gamingPanther3/RechenMax/blob/master/LICENSE"));
+            startActivity(browserIntent);
         });
     }
 
-
-
-    // TODO improve this
-    public void openSettingsLanguageConfig(MenuItem item) {
+    public void openEmailAppAndFoundReportError(View item) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri data;
+            data = Uri.parse("mailto:ml.programs.service@gmail.com?subject=");
+            intent.setData(data);
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException e) {
+            ToastHelper.showToastLong(getString(R.string.about_no_email_client), getApplicationContext());
+            ClipData clipData = ClipData.newPlainText("", getString(R.string.about_email_address));
+            clipboardManager.setPrimaryClip(clipData);
+        }
+    }
+    
+    public void openSettingsLanguageConfig(View item) {
         TextView actionbarMenuTextview = findViewById(R.id.settings_language);
         PopupMenu popup = new PopupMenu(this, actionbarMenuTextview);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.settings_language_config, popup.getMenu());
         popup.show();
-
-
     }
 
-    private void openRechenMaxUI() {
-        Intent intent = new Intent(SettingsActivity.this, RechenMaxUI.class);
-        startActivity(intent);
+    public void changeDecimalPointsTo(MenuItem item) {
+        int numberOfDecimalPoints = Integer.parseInt(Objects.requireNonNull(item.getTitle()).toString());
+        dataManager.updateValuesInJSONSettingsData("numberOfDecimals", "value", String.valueOf(numberOfDecimalPoints), getApplicationContext());
+
+        ToastHelper.showToastShort(
+                getString(R.string.settings_decimal_points_set_to) + " " + numberOfDecimalPoints
+                , getApplicationContext()
+        );
+    }
+
+    public void openSettingsInsertPIConfig(View item) {
+        try {
+            oldValue = Boolean.parseBoolean(dataManager.getJSONSettingsData("refactorPI", getApplicationContext()).getString("value"));
+        } catch (JSONException e) {
+            oldValue = false;
+        }
+        dataManager.updateValuesInJSONSettingsData("refactorPI", "value", String.valueOf(!oldValue), getApplicationContext());
+
+        ToastHelper.showToastShort(
+            getString(R.string.settings_insert_pi_set_to) + " " +
+                (oldValue ? getString(R.string.settings_insert_pi_insert) : getString(R.string.settings_insert_pi_not_insert))
+                , getApplicationContext()
+        );
+    }
+
+    public void openSettingsRememberNotificationConfig(View item) {
+        try {
+            oldValue = Boolean.parseBoolean(dataManager.getJSONSettingsData("allowRememberNotifications", getApplicationContext()).getString("value"));
+        } catch (JSONException e) {
+            oldValue = false;
+        }
+        dataManager.updateValuesInJSONSettingsData("allowRememberNotifications", "value", String.valueOf(!oldValue), getApplicationContext());
+
+        ToastHelper.showToastShort(
+                getString(R.string.settings_remember_notification_set_to) + " " +
+                        (oldValue ? getString(R.string.settings_remember_notification_send) : getString(R.string.settings_remember_notification_do_not_send))
+                , getApplicationContext()
+        );
+    }
+
+    public void openSettingsDailyHintsNotificationConfig(View item) {
+        try {
+            oldValue = Boolean.parseBoolean(dataManager.getJSONSettingsData("allowDailyNotifications", getApplicationContext()).getString("value"));
+        } catch (JSONException e) {
+            oldValue = false;
+        }
+        dataManager.updateValuesInJSONSettingsData("allowDailyNotifications", "value", String.valueOf(!oldValue), getApplicationContext());
+
+        ToastHelper.showToastShort(
+                getString(R.string.settings_daily_hints_notification_set_to) + " " +
+                        (oldValue ? getString(R.string.settings_daily_hints_notification_send) : getString(R.string.settings_daily_hints_notification_do_not_send))
+                , getApplicationContext()
+        );    }
+
+    public void openSettingsDecimalPointsConfig(View item) {
+        TextView actionbarMenuTextview = findViewById(R.id.settings_decimal_points);
+        PopupMenu popup = new PopupMenu(this, actionbarMenuTextview);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.settings_decimals_config, popup.getMenu());
+        popup.show();
     }
 
     public void changeLanguageToGerman(MenuItem item) {
@@ -107,14 +151,29 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void changeLanguageToEnglish(MenuItem item) {
+        ToastHelper.showToastShort("English is not available yet", getApplicationContext());
+        // TODO add language
+        if(true) {
+            return;
+        }
         setLocale("en");
     }
 
     public void changeLanguageToSpanish(MenuItem item) {
+        ToastHelper.showToastShort("Spanish is not available yet", getApplicationContext());
+        // TODO add language
+        if(true) {
+            return;
+        }
         setLocale("es");
     }
 
     public void changeLanguageToFrench(MenuItem item) {
+        ToastHelper.showToastShort("French is not available yet", getApplicationContext());
+        // TODO add language
+        if(true) {
+            return;
+        }
         setLocale("fr");
     }
 
@@ -128,5 +187,10 @@ public class SettingsActivity extends AppCompatActivity {
         Intent refresh = new Intent(this, SettingsActivity.class);
         finish();
         startActivity(refresh);
+    }
+
+    public void openRechenMaxUI(View item) {
+        Intent intent = new Intent(SettingsActivity.this, RechenMaxUI.class);
+        startActivity(intent);
     }
 }

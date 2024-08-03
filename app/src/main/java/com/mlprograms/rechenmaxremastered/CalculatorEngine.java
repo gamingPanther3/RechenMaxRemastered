@@ -19,6 +19,7 @@ package com.mlprograms.rechenmaxremastered;
 import static com.mlprograms.rechenmaxremastered.NumberHelper.PI;
 import static com.mlprograms.rechenmaxremastered.NumberHelper.e;
 import static com.mlprograms.rechenmaxremastered.ParenthesesBalancer.balanceParentheses;
+import static ch.obermuhlner.math.big.DefaultBigDecimalMath.log10;
 import static ch.obermuhlner.math.big.DefaultBigDecimalMath.pow;
 
 import android.annotation.SuppressLint;
@@ -206,7 +207,7 @@ public class CalculatorEngine {
         }
     }
 
-    private static boolean containsAnyVariable(String str, String chars) {
+    static boolean containsAnyVariable(String str, String chars) {
         for (char c : chars.toCharArray()) {
             if (str.contains(Character.toString(c))) {
                 return true;
@@ -215,7 +216,7 @@ public class CalculatorEngine {
         return false;
     }
 
-    private static String getVariables(String calculation) {
+    static String getVariables(String calculation) {
         try {
             String[] variableKeys = {"variable_a", "variable_b", "variable_c", "variable_d", "variable_e",
                     "variable_f", "variable_g", "variable_x", "variable_y", "variable_z"};
@@ -526,7 +527,10 @@ public class CalculatorEngine {
         functionsMap.put("tan⁻¹(", CalculatorEngine::atan);
         functionsMap.put("tanh⁻¹(", CalculatorEngine::atanh);
 
-        if (function.startsWith("log") && function.endsWith("(")) {
+        if(function.equals("log(")) {
+            BigDecimal operand = stack.remove(stack.size() - 1);
+            stack.add(log10(operand));
+        } else if (function.startsWith("log") && function.endsWith("(")) {
             int baseStartIndex = 3;
             int baseEndIndex = function.length() - 1;
             String baseString = function.substring(baseStartIndex, baseEndIndex);
@@ -642,75 +646,39 @@ public class CalculatorEngine {
      */
     public static int precedence(final String operator) {
         // If the operator is an opening parenthesis, return 0
-        switch (operator) {
-            case "(":
-                return 0;
+        return switch (operator) {
+            case "(" -> 0;
 
             // If the operator is addition or subtraction, return 1
-            case "+":
-            case "-":
-                return 1;
+            case "+", "-" -> 1;
 
             // If the operator is multiplication or division, return 2
-            case "*":
-            case "/":
-                return 2;
+            case "*", "/" -> 2;
 
             // If the operator is exponentiation, return 3
-            case "^":
-                return 3;
+            case "^" -> 3;
 
             // If the operator is root, return 4
-            case "√":
-            case "³√":
-                return 4;
+            case "√", "³√" -> 4;
 
             // If the operator is factorial, return 5
-            case "!":
-                return 5;
+            case "!" -> 5;
 
             // If the operator is sine, cosine, or tangent ..., return 6
-            case "log(":
-            case "log₂(":
-            case "log₃(":
-            case "log₄(":
-            case "log₅(":
-            case "log₆(":
-            case "log₇(":
-            case "log₈(":
-            case "log₉(":
-            case "ln(":
-            case "sin(":
-            case "cos(":
-            case "tan(":
-            case "sinh(":
-            case "cosh(":
-            case "tanh(":
-            case "sinh⁻¹(":
-            case "cosh⁻¹(":
-            case "tanh⁻¹(":
-            case "sin⁻¹(":
-            case "cos⁻¹(":
-            case "tan⁻¹(":
-            case "Pol(":
-            case "Rec(":
-                return 6;
-            case "Ran#":
-            case "RanInt(":
-                return 7;
-            case "С":
-            case "Ƥ":
-            case "⁒":
-            case "؉":
-                return 8;
+            case "log(", "log₂(", "log₃(", "log₄(", "log₅(", "log₆(", "log₇(", "log₈(", "log₉(",
+                 "ln(", "sin(", "cos(", "tan(", "sinh(", "cosh(", "tanh(", "sinh⁻¹(", "cosh⁻¹(",
+                 "tanh⁻¹(", "sin⁻¹(", "cos⁻¹(", "tan⁻¹(", "Pol(", "Rec(" -> 6;
+            case "Ran#", "RanInt(" -> 7;
+            case "С", "Ƥ", "⁒", "؉" -> 8;
 
             // If the operator is not recognized, throw an exception
-            default:
-                if(operator.startsWith("log") && operator.endsWith("(")) {
-                    return 6;
+            default -> {
+                if (operator.startsWith("log") && operator.endsWith("(")) {
+                    yield 6;
                 }
                 throw new IllegalArgumentException(rechenmaxUI.getString(R.string.errorMessage2));
-        }
+            }
+        };
     }
 
     /**

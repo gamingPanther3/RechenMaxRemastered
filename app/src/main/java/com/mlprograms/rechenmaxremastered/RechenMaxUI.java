@@ -1,7 +1,10 @@
 package com.mlprograms.rechenmaxremastered;
 
+import static com.mlprograms.rechenmaxremastered.CalculatorEngine.containsAnyVariable;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.fixExpression;
+import static com.mlprograms.rechenmaxremastered.CalculatorEngine.getVariables;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.isNumber;
+import static com.mlprograms.rechenmaxremastered.CalculatorEngine.isOperator;
 import static com.mlprograms.rechenmaxremastered.NumberHelper.PI;
 import static com.mlprograms.rechenmaxremastered.NumberHelper.e;
 import static com.mlprograms.rechenmaxremastered.ParenthesesBalancer.balanceParentheses;
@@ -46,10 +49,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RechenMaxUI extends AppCompatActivity {
+
+    private boolean isFormatting;
 
     Context rechenMaxUI = this;
     private DataManager dataManager;
@@ -199,6 +205,11 @@ public class RechenMaxUI extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (!isFormatting) {
+                    isFormatting = true;
+                    formatCalculationText();
+                    isFormatting = false;
+                }
                 adjustCursorPosition(calculation_edittext);
             }
         });
@@ -316,12 +327,12 @@ public class RechenMaxUI extends AppCompatActivity {
         setActionButtonListener(R.id.add_parentheses_textview, this::addParentheses);
 
         setActionButtonListener(R.id.backspace_textview, this::deleteCharacter);
-        setActionButtonListener(R.id.divide_textview, () -> addOperator(getString(R.string.divide_)));
-        setActionButtonListener(R.id.multiply_textview, () -> addOperator(getString(R.string.multiply_)));
-        setActionButtonListener(R.id.subtract_textview, () -> addOperator(getString(R.string.subtract_)));
-        setActionButtonListener(R.id.add_textview, () -> addOperator(getString(R.string.add_)));
+        setActionButtonListener(R.id.divide_textview, () -> addStringToCalculation(getString(R.string.divide_)));
+        setActionButtonListener(R.id.multiply_textview, () -> addStringToCalculation(getString(R.string.multiply_)));
+        setActionButtonListener(R.id.subtract_textview, () -> addStringToCalculation(getString(R.string.subtract_)));
+        setActionButtonListener(R.id.add_textview, () -> addStringToCalculation(getString(R.string.add_)));
 
-        setActionButtonListener(R.id.comma_textview, () -> addOperator(getString(R.string.comma_)));
+        setActionButtonListener(R.id.comma_textview, () -> addStringToCalculation(getString(R.string.comma_)));
         setActionButtonListener(R.id.negate_textview, this::negate);
         setCalculateButtonListener(R.id.calculate_textview, this::calculate);
     }
@@ -351,7 +362,7 @@ public class RechenMaxUI extends AppCompatActivity {
 
     public void openHelp(MenuItem item) {
         // TODO
-        ToastHelper.showToastLong(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
+        ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
     }
 
     public void openSettings(MenuItem item) {
@@ -361,7 +372,7 @@ public class RechenMaxUI extends AppCompatActivity {
 
     public void clearHistory(MenuItem item) {
         // TODO
-        ToastHelper.showToastLong(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
+        ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
     }
 
     private void adjustCursorPosition(EditText editText) {
@@ -387,31 +398,37 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     private void addStringToCalculation(String s) {
-        try {
-            String[] variables = {"A", "B", "C", "D", "E", "F", "G", "X", "Y", "Z"};
-            if(Arrays.toString(variables).contains(s)) {
-                if(dataManager.getJSONSettingsData("variable_" + s.toLowerCase(), getApplicationContext()).getString("value").isEmpty()) {
-                    ToastHelper.showToastLong(getString(R.string.variable_is_not_defined), getApplicationContext());
-                    return;
+        EditText editText = findViewById(R.id.calculation_edittext);
+
+        if(!s.equals(",") && !s.equals(";")) {
+            try {
+                String[] variables = {"A", "B", "C", "D", "E", "F", "G", "X", "Y", "Z"};
+                if(Arrays.toString(variables).contains(s)) {
+                    if(dataManager.getJSONSettingsData("variable_" + s.toLowerCase(), getApplicationContext()).getString("value").isEmpty()) {
+                        ToastHelper.showToastLong(getString(R.string.variable_is_not_defined), getApplicationContext());
+                        return;
+                    }
                 }
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
             }
-        } catch (JSONException ex) {
-            throw new RuntimeException(ex);
         }
 
         if(isErrorMessage(getCalculateText())) {
             setCalculateText("");
         }
 
+        isFormatting = true;
         addCalculateText(s);
         calculateIfIsNotInvalidCalculation();
-        formatCalculationText();
+        if(!s.equals(",")) {
+            formatCalculationText();
+        }
         setTextColorAccordingToCalculation();
         resetCalculatePressed();
 
         if(!calculation_edittext.isFocused()) {
-            calculation_edittext.findFocus();
-            calculation_edittext.setSelection(calculation_edittext.getText().length());
+            scrollToEnd(findViewById(R.id.calculation_horizontal_scroll_view));
         } else {
             scrollToCursor(
                     findViewById(R.id.calculation_horizontal_scroll_view),
@@ -420,6 +437,10 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         dataManager.saveNumbers(getApplicationContext());
+
+        if(!editText.isFocused()) {
+            editText.setSelection(editText.getText().length());
+        }
     }
 
     private void setTextColorAccordingToCalculation() {
@@ -485,8 +506,9 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     private void deleteCharacter() {
+        // TODO
         EditText editText = findViewById(R.id.calculation_edittext);
-        final int cursorPosition = editText.getSelectionStart();
+        int cursorPosition = editText.getSelectionStart();
 
         if(editText.getText().toString().isEmpty()) {
             return;
@@ -497,47 +519,41 @@ public class RechenMaxUI extends AppCompatActivity {
             return;
         }
 
-        if (editText.isFocused()) {
-            if (cursorPosition > 0) {
-                Editable editable = editText.getText();
-                editable.delete(cursorPosition - 1, cursorPosition);
-                editText.setSelection(cursorPosition - 1);
+        Editable editable = editText.getText();
 
-                // TODO: implement removeOperators
-            }
-        } else {
-            String currentText = getCalculateText();
-            if (!currentText.isEmpty()) {
-                editText.setText(currentText.substring(0, currentText.length() - 1));
+        if (!editText.isFocused()) {
+            cursorPosition = editable.length();
+            scrollToEnd(findViewById(R.id.calculation_horizontal_scroll_view));
+        }
+
+        if(cursorPosition > 0) {
+            int deleteFrom = cursorPosition - 1;
+
+            if (editable.charAt(deleteFrom) != '(') {
+                editable.delete(deleteFrom, deleteFrom + 1);
+                editText.setSelection(deleteFrom);
+            } else {
+                while (deleteFrom >= 0) {
+                    char charToDelete = editable.charAt(deleteFrom);
+                    if (isOperator(String.valueOf(charToDelete)) || isOperator(String.valueOf(charToDelete))) {
+                        break;
+                    }
+                    if (charToDelete == '(' || Character.isLowerCase(charToDelete) || charToDelete == '⁻' || charToDelete == '¹') {
+                        editable.delete(deleteFrom, deleteFrom + 1);
+                        editText.setSelection(deleteFrom);
+                    }
+                    deleteFrom--;
+
+                    if (deleteFrom - 1 > 0) {
+                        if(editable.charAt(deleteFrom) == '(') {
+                            break;
+                        }
+                    }
+                }
             }
         }
 
-        formatCalculationText();
-    }
 
-    public static String removeOperators(String input) {
-        // Regular expression to match log with any subscript followed by "("
-        Pattern logPattern = Pattern.compile("log[₀-₉]+\\($");
-
-        for (String operator : operatorsAdjustCursor) {
-            if (input.endsWith(operator)) {
-                return input.substring(0, input.length() - operator.length());
-            } else if (operator.endsWith("(") && input.endsWith(operator.substring(0, operator.length() - 1))) {
-                return input.substring(0, input.length() - operator.length() + 1);
-            }
-        }
-
-        Matcher logMatcher = logPattern.matcher(input);
-        if (logMatcher.find() && logMatcher.end() == input.length()) {
-            return input.substring(0, logMatcher.start());
-        }
-
-        return input;
-    }
-
-    private void addOperator(String s) {
-        addCalculateText(s);
-        calculateIfIsNotInvalidCalculation();
     }
 
     private void negate() {
@@ -772,11 +788,26 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     private void calculateIfIsNotInvalidCalculation() {
-        if(!isErrorMessage(CalculatorEngine.calculate(getCalculateText()))) {
-            setResultText(CalculatorEngine.calculate(getCalculateText()));
-        } else {
-            setResultText("");
+        String calculation = getCalculateText();
+        while (containsAnyVariable(calculation, "ABCDEFGWXYZ")) {
+            calculation = getVariables(fixExpression(calculation));
         }
+
+        if(containsNumber(calculation) || calculation.contains("е") || calculation.contains("π")) {
+            if(!isErrorMessage(String.valueOf(CalculatorEngine.calculate(getCalculateText())))) {
+                setResultText(CalculatorEngine.calculate(getCalculateText()));
+            } else {
+                setResultText("");
+            }
+        }
+    }
+
+    public static boolean containsNumber(String str) {
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }return false;
     }
 
     private void clearClipboard() {
@@ -832,7 +863,7 @@ public class RechenMaxUI extends AppCompatActivity {
             textView.setOnClickListener(v -> {
                 action.run();
 
-                if(rechenMaxUI != null && !isErrorMessage(CalculatorEngine.calculate(getCalculateText()))) {
+                if(rechenMaxUI != null && !isErrorMessage(String.valueOf(CalculatorEngine.calculate(getCalculateText())))) {
                     setResultText(CalculatorEngine.calculate(getCalculateText()));
                 } else {
                     setResultText("");
@@ -987,7 +1018,7 @@ public class RechenMaxUI extends AppCompatActivity {
 
         //System.out.println(cursorPosition);
         //System.out.println(newCursorPosition);
-        
+
         calculation_edittext.setSelection(newCursorPosition);
         adjustCursorPosition(calculation_edittext);
         setTextColorAccordingToCalculation();
@@ -995,19 +1026,20 @@ public class RechenMaxUI extends AppCompatActivity {
 
     private int getNewCursorPosition(int cursorPosition, String formattedText, int dotsBeforeFormatting) {
         int dotsAfterFormatting = 0;
-        for(int x = 1; x < cursorPosition; x++) {
-            if(formattedText.charAt(x - 1) == '.') {
-                dotsAfterFormatting++;
+
+        if (formattedText.length() > 0) {
+            int limit = Math.min(cursorPosition, formattedText.length());
+            for (int x = 1; x < limit; x++) {
+                if (formattedText.charAt(x - 1) == '.') {
+                    dotsAfterFormatting++;
+                }
             }
         }
 
-        //System.out.println("dotsBeforeFormatting: " + dotsBeforeFormatting);
-        //System.out.println("dotsAfterFormatting: " + dotsAfterFormatting);
-
         int newCursorPosition = cursorPosition + dotsAfterFormatting - dotsBeforeFormatting;
-        if(newCursorPosition > formattedText.length()) {
+        if (newCursorPosition > formattedText.length()) {
             newCursorPosition = formattedText.length();
-        } else if(newCursorPosition < 0) {
+        } else if (newCursorPosition < 0) {
             newCursorPosition = 0;
         }
         return newCursorPosition;

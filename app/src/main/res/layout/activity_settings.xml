@@ -298,7 +298,8 @@
             android:textSize="@dimen/app_menu_title_size"
             android:textColor="@color/colorButtonVeryHigh"
             app:drawableLeftCompat="@drawable/baseline_event_note_24"
-            app:layout_constraintTop_toBottomOf="@+id/settings_category_info" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_category_info"
+            android:onClick="openChangelogInAnotherActivity" />
 
         <TextView
             android:id="@+id/settings_license"

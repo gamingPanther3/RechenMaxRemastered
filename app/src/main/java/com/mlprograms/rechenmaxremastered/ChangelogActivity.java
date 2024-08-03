@@ -1,6 +1,8 @@
 package com.mlprograms.rechenmaxremastered;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,4 +26,10 @@ public class ChangelogActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    public void openRechenMaxUI(View item) {
+        Intent intent = new Intent(ChangelogActivity.this, RechenMaxUI.class);
+        startActivity(intent);
+    }
+
 }

@@ -46,7 +46,9 @@ public class SettingsActivity extends AppCompatActivity {
         // TODO: display easter egg if button is pressed 12 times
     }
 
-    // TODO: release notes
+    public void openChangelogInAnotherActivity(View item) {
+        ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
+    }
 
     public void openPrivacyPolicyOnGitHubInBrowser(View item) {
         findViewById(R.id.settings_privacy_policy).setOnClickListener(v -> {

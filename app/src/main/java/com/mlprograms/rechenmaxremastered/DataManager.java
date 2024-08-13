@@ -112,7 +112,7 @@ import java.util.Map;
 //  | calculationCount                 | 0 - ...                          | MainActivity                         |
 //  | openedApp                        | 0 - ...                          | MainActivity                         |
 //  | maxNumbersWithoutScrolling       | 1 - ...                          | MainActivity                         |
-//  | variable_a                       | String                          | MainActivity                         |
+//  | variable_a                       | String                           | MainActivity                         |
 //  | variable_b                       | String                           | MainActivity                         |
 //  | variable_c                       | String                           | MainActivity                         |
 //  | variable_d                       | String                           | MainActivity                         |
@@ -122,6 +122,7 @@ import java.util.Map;
 //  | variable_x                       | String                           | MainActivity                         |
 //  | variable_y                       | String                           | MainActivity                         |
 //  | variable_z                       | String                           | MainActivity                         |
+//  | appLanguage                      | String                           | MainActivity, SettingsActivity       |
 
 public class DataManager {
 
@@ -437,6 +438,8 @@ public class DataManager {
             initializeSetting("variable_x", "", applicationContext);
             initializeSetting("variable_y", "", applicationContext);
             initializeSetting("variable_z", "", applicationContext);
+
+            initializeSetting("appLanguage", "de", applicationContext);
 
         } catch (JSONException e) {
             throw new RuntimeException(e);

@@ -149,6 +149,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void changeLanguageToGerman(MenuItem item) {
+        dataManager.saveToJSONSettings("appLanguage", "de", getApplicationContext());
         setLocale("de");
     }
 
@@ -158,6 +159,7 @@ public class SettingsActivity extends AppCompatActivity {
         if(true) {
             return;
         }
+        dataManager.saveToJSONSettings("appLanguage", "en", getApplicationContext());
         setLocale("en");
     }
 
@@ -167,6 +169,7 @@ public class SettingsActivity extends AppCompatActivity {
         if(true) {
             return;
         }
+        dataManager.saveToJSONSettings("appLanguage", "es", getApplicationContext());
         setLocale("es");
     }
 
@@ -176,6 +179,7 @@ public class SettingsActivity extends AppCompatActivity {
         if(true) {
             return;
         }
+        dataManager.saveToJSONSettings("appLanguage", "fr", getApplicationContext());
         setLocale("fr");
     }
 

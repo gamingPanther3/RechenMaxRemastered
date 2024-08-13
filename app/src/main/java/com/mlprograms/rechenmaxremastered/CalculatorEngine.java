@@ -748,6 +748,7 @@ public class CalculatorEngine {
                     (
                         (isSymbol(currentChar) && isNumber(nextChar))   ||
                         (isNumber(currentChar) && isSymbol(nextChar))   ||
+                        (isSymbol(currentChar) && isSymbol(nextChar)) ||
                         (isNumber(currentChar) && nextChar.equals("(")) ||
                         (currentChar.equals(")") && isNumber(nextChar))
                     )

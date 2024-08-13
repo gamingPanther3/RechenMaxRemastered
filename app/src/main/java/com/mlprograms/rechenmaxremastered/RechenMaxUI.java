@@ -1,5 +1,6 @@
 package com.mlprograms.rechenmaxremastered;
 
+import static androidx.core.content.ContextCompat.startActivity;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.containsAnyVariable;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.fixExpression;
 import static com.mlprograms.rechenmaxremastered.CalculatorEngine.getVariables;
@@ -18,11 +19,13 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,8 +53,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RechenMaxUI extends AppCompatActivity {
 
@@ -100,8 +101,6 @@ public class RechenMaxUI extends AppCompatActivity {
             "RanInt(", "Ran#", "!", "(", ")",
             "%", "×", "÷", "+", "-", "½", "⅓", "¼", "⅕", "⅒", "%×", "%*", "⁒", "π", "е", "E"
     };
-
-    // TODO change language according to settings
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,10 +153,10 @@ public class RechenMaxUI extends AppCompatActivity {
         calculation_edittext.setSelection(calculation_edittext.getText().length());
 
         try {
-            String scienticMode = dataManager.getJSONSettingsData("functionMode", getApplicationContext()).getString("value");
+            String scientificMode = dataManager.getJSONSettingsData("functionMode", getApplicationContext()).getString("value");
 
             TextView actionbarScienticModeTextview = findViewById(R.id.actionbar_scientic_mode_textview);
-            actionbarScienticModeTextview.setText(scienticMode);
+            actionbarScienticModeTextview.setText(scientificMode);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -176,6 +175,35 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         formatCalculationText();
+
+        /* TODO
+        dataManager.saveToJSONSettings("appLanguage", "de", getApplicationContext());
+
+        try {
+            String savedLocale = dataManager.getJSONSettingsData("appLanguage", getApplicationContext()).getString("value");
+            if(!Objects.equals(getLocale(), savedLocale)) {
+                setLocale(savedLocale);
+            }
+        } catch (JSONException ex) {
+            throw new RuntimeException(ex);
+        }
+        */
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(this, RechenMaxUI.class);
+        finish();
+        startActivity(refresh);
+    }
+
+    public String getLocale() {
+        return getResources().getConfiguration().locale.toString();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -205,12 +233,18 @@ public class RechenMaxUI extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(getCalculateText().isEmpty()) {
+                    setResultText("");
+                    return;
+                }
+
                 if (!isFormatting) {
                     isFormatting = true;
                     formatCalculationText();
                     isFormatting = false;
                 }
                 adjustCursorPosition(calculation_edittext);
+                calculateIfIsNotInvalidCalculation();
             }
         });
 
@@ -419,11 +453,19 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         isFormatting = true;
-        addCalculateText(s);
         calculateIfIsNotInvalidCalculation();
-        if(!s.equals(",")) {
+
+        if(Character.isDigit(s.charAt(0)) && getCalculateText().endsWith(",")) {
+            formatCalculationText();
+            addCalculateText(",");
+            addCalculateText(s);
+        } else if(s.equals(",")) {
+            addCalculateText(",");
+        } else {
+            addCalculateText(s);
             formatCalculationText();
         }
+
         setTextColorAccordingToCalculation();
         resetCalculatePressed();
 
@@ -442,7 +484,6 @@ public class RechenMaxUI extends AppCompatActivity {
             editText.setSelection(editText.getText().length());
         }
     }
-
     private void setTextColorAccordingToCalculation() {
         if(!getResultText().isEmpty() && (isErrorMessage(getResultText()) || isErrorMessage(getCalculateText()))) {
             calculation_edittext.setTextColor(Color.parseColor(hexColorErrorMessageRed));
@@ -531,7 +572,7 @@ public class RechenMaxUI extends AppCompatActivity {
 
             if (editable.charAt(deleteFrom) != '(') {
                 editable.delete(deleteFrom, deleteFrom + 1);
-                editText.setSelection(deleteFrom);
+                editText.setSelection(Math.min(editText.length(), deleteFrom));
             } else {
                 while (deleteFrom >= 0) {
                     char charToDelete = editable.charAt(deleteFrom);
@@ -978,9 +1019,6 @@ public class RechenMaxUI extends AppCompatActivity {
             calculationTextParts.add(tempToken.toString());
         }
 
-        //System.out.println("calculateText: " + calculateText);
-        //System.out.println("calculationTextParts (before): " + calculationTextParts);
-
         int addedDots = 0;
         ArrayList<Integer> uniqueNumberPositions = removeDuplicates(numberPositionInCalculationTextParts);
 
@@ -1003,10 +1041,6 @@ public class RechenMaxUI extends AppCompatActivity {
             }
         }
 
-        //System.out.println("calculationTextParts (after): " + calculationTextParts);
-        //System.out.println("numberPositionInCalculationTextParts: " + removeDuplicates(numberPositionInCalculationTextParts));
-        //System.out.println("addedDots: " + addedDots);
-
         StringBuilder formattedText = new StringBuilder();
         for(int x = 0; x < calculationTextParts.size(); x++) {
             formattedText.append(calculationTextParts.get(x));
@@ -1016,10 +1050,9 @@ public class RechenMaxUI extends AppCompatActivity {
 
         int newCursorPosition = getNewCursorPosition(cursorPosition, formattedText.toString(), dotsBeforeFormatting);
 
-        //System.out.println(cursorPosition);
-        //System.out.println(newCursorPosition);
-
-        calculation_edittext.setSelection(newCursorPosition);
+        if(formattedText.length() >= 1) {
+            calculation_edittext.setSelection(Math.min(formattedText.length() - 1, newCursorPosition));
+        }
         adjustCursorPosition(calculation_edittext);
         setTextColorAccordingToCalculation();
     }

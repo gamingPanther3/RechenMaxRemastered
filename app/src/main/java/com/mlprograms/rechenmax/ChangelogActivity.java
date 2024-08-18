@@ -12,8 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ChangelogActivity extends AppCompatActivity {
 
-    // TODO: add changelog and create changelog ui
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +25,8 @@ public class ChangelogActivity extends AppCompatActivity {
         });
     }
 
-    public void openRechenMaxUI(View item) {
-        Intent intent = new Intent(ChangelogActivity.this, RechenMaxUI.class);
+    public void openSettingsActivity(View item) {
+        Intent intent = new Intent(ChangelogActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 

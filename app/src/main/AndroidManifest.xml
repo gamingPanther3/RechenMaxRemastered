@@ -34,7 +34,8 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".SettingsActivity"
             android:configChanges="locale|uiMode"
-            android:exported="false">
+
+        android:exported="false">
         </activity>
 
         <activity

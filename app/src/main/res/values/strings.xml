@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">RechenMax</string>
-    <string name="app_version_value" translatable="false">v2.02.0139</string>
-    <string name="app_version" translatable="false">Version - v2.02.0139</string>
+    <string name="app_version_value" translatable="false">v3.01.0192</string>
+    <string name="app_version" translatable="false">Version - v3.01.0192</string>
 
     <string name="result_text" translatable="false"></string> <!-- 1246,89 -->
     <string name="calculation_text" translatable="false"></string> <!-- 1253×52,4 -->
@@ -183,7 +183,7 @@
     <string name="tooltip_square_root">Quadratwurzel (√(x))</string>
     <string name="tooltip_factorial">Fakultät (n!)</string>
     <string name="tooltip_power">Potenz (x^y)</string>
-    <string name="tooltip_percentage">n Prozent von x (x%×n) / n sind y Prozent von x (x%÷n)</string>
+    <string name="tooltip_percentage">Modulo (n%m) / n Prozent von x (x%×n) / n sind y Prozent von x (x%÷n)</string>
     <string name="tooltip_dropdown_button">Wissenschaftlichen Modus aktivieren / deaktivieren</string>
     <string name="tooltip_qubic_root">Kubikwurzel (³√(x))</string>
     <string name="tooltip_log">Logarithmus (log(x))</string>
@@ -300,7 +300,6 @@
     <string name="about_other_privacy_policy">Datenschutzerklärung</string>
     <string name="about_made_in_germany">Mit ❤️ in Deutschland entwickelt.</string>
 
-
     <string name="settings_title">Einstellungen</string>
     <string name="settings_general">Allgemein</string>
     <string name="settings_language">Sprache</string>
@@ -318,30 +317,32 @@
     <string name="settings_reminder_description">Erhalten Sie Benachrichtigungen, um den Taschenrechner regelmäßig zu nutzen.</string>
     <string name="settings_daily_hints">Tägliche Tipps</string>
     <string name="settings_daily_hints_description">Erhalten Sie täglich nützliche Tipps zur optimalen Nutzung des Taschenrechners.</string>
-
     <string name="about_no_email_client">Es ist kein E-Mail-Client installiert. (Email-Adresse kopiert)</string>
-
     <string name="variable_is_not_defined">Variable ist nicht definiert</string>
     <string name="variable_is_now_defined">Variable ist nun definiert (\'</string>
     <string name="variable_is_now_undefined">Variable wurde entfernt</string>
     <string name="variable_cannot_contain_itself">Variable darf nicht sich selbst enthalten</string>
-
     <string name="settings_language_config_german">Deutsch</string>
     <string name="settings_language_config_english">Englisch</string>
     <string name="settings_language_config_spanish">Spanisch</string>
     <string name="settings_language_config_french">Französisch</string>
-
     <string name="settings_insert_pi_set_to">PI wird</string>
     <string name="settings_insert_pi_insert">eingefügt</string>
     <string name="settings_insert_pi_not_insert">nicht eingefügt</string>
-
     <string name="settings_daily_hints_notification_set_to">Tägliche Tipps werden</string>
     <string name="settings_daily_hints_notification_send">gesendet</string>
     <string name="settings_daily_hints_notification_do_not_send">nicht gesendet</string>
-
     <string name="settings_remember_notification_set_to">Erinnerungen werden</string>
     <string name="settings_remember_notification_send">gesendet</string>
     <string name="settings_remember_notification_do_not_send">nicht gesendet</string>
-
     <string name="settings_decimal_points_set_to">Anzahl der Nachkommastellen beträgt nun:</string>
+
+    <string name="changelog_title">Changelog</string>
+    <string name="changelog_general">Neue Funkionen</string>
+    <string name="changelog_new_ui">Neue Benutzeroberfläche</string>
+    <string name="changelog_new_ui_description">Die neue Benutzeroberfläche bietet ein modernes Design, verbesserte Navigation und schnellere Performance für ein noch reibungsloseres und effizienteres Nutzungserlebnis.</string>
+    <string name="changelog_new_edit">Bearbeitungsmöglichkeiten</string>
+    <string name="changelog_new_edit_description">Mit der neuen Benutzeroberfläche kann man nun auch die Berechnungen nicht nur besser sondern auf effizienter bearbeiten.</string>
+    <string name="changelog_variables">Variablen</string>
+    <string name="changelog_variables_description">Von nun an können auch Werte sowie Berechnungen in Variablen gespeichert werden</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.mlprograms.rechenmax;
 
+import static com.mlprograms.rechenmax.RechenMaxUI.setLocale;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -42,12 +44,13 @@ public class SettingsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // TODO: display easter egg if button is pressed 12 times
     }
 
     public void openChangelogInAnotherActivity(View item) {
-        ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
+        //ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
+
+        Intent intent = new Intent(SettingsActivity.this, ChangelogActivity.class);
+        startActivity(intent);
     }
 
     public void openPrivacyPolicyOnGitHubInBrowser(View item) {
@@ -150,17 +153,18 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void changeLanguageToGerman(MenuItem item) {
         dataManager.saveToJSONSettings("appLanguage", "de", getApplicationContext());
-        setLocale("de");
+        setLocale(this, "de");
     }
 
     public void changeLanguageToEnglish(MenuItem item) {
-        ToastHelper.showToastShort("English is not available yet", getApplicationContext());
+        ToastHelper.showToastShort("Spanish is not available yet", getApplicationContext());
         // TODO add language
         if(true) {
             return;
         }
+
         dataManager.saveToJSONSettings("appLanguage", "en", getApplicationContext());
-        setLocale("en");
+        setLocale(this, "en");
     }
 
     public void changeLanguageToSpanish(MenuItem item) {
@@ -170,7 +174,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         dataManager.saveToJSONSettings("appLanguage", "es", getApplicationContext());
-        setLocale("es");
+        setLocale(this, "es");
     }
 
     public void changeLanguageToFrench(MenuItem item) {
@@ -180,19 +184,7 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         dataManager.saveToJSONSettings("appLanguage", "fr", getApplicationContext());
-        setLocale("fr");
-    }
-
-    public void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, SettingsActivity.class);
-        finish();
-        startActivity(refresh);
+        setLocale(this, "fr");
     }
 
     public void openRechenMaxUI(View item) {

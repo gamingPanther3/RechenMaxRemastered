@@ -1,4 +1,4 @@
-package com.mlprograms.rechenmax;
+ package com.mlprograms.rechenmax;
 
 /*
  * Copyright (c) 2024 by Max Lemberg
@@ -151,7 +151,6 @@ public class CalculatorEngine {
                 .replace("%*", "⁒")
                 .replace("%÷", "؉")
                 .replace("%/", "؉")
-                .replace("%", "⁒")
                 .replace(".", "")
                 .replace(",", ".");
 
@@ -406,6 +405,8 @@ public class CalculatorEngine {
                 return nPercentFromM(operand1, operand2);
             case "؉":
                 return mIsXPercentOfN(operand1, operand2);
+            case "%":
+                return BigDecimal.valueOf(modulo(Integer.parseInt(String.valueOf(operand1)), Integer.parseInt(String.valueOf(operand2))));
             default:
                 throw new IllegalArgumentException(rechenmaxUI.getString(R.string.errorMessage5));
         }
@@ -668,7 +669,7 @@ public class CalculatorEngine {
                  "ln(", "sin(", "cos(", "tan(", "sinh(", "cosh(", "tanh(", "sinh⁻¹(", "cosh⁻¹(",
                  "tanh⁻¹(", "sin⁻¹(", "cos⁻¹(", "tan⁻¹(", "Pol(", "Rec(" -> 6;
             case "Ran#", "RanInt(" -> 7;
-            case "С", "Ƥ", "⁒", "؉" -> 8;
+            case "С", "Ƥ", "⁒", "؉", "%" -> 8;
 
             // If the operator is not recognized, throw an exception
             default -> {
@@ -740,8 +741,7 @@ public class CalculatorEngine {
                 stringBuilder.append(currentChar);
                 //Log.e("fixExpression", "CurrentChar: " + currentChar + " NextChar: " + nextChar);
                 //Log.e("fixExpression", "stringBuilder: " + stringBuilder);
-
-                // TODO: check if its correct
+                
                 if (
                     !nextChar.isEmpty() &&
                     (
@@ -902,7 +902,7 @@ public class CalculatorEngine {
                 calculation.contains("^") || calculation.contains("√") || calculation.contains("!") || calculation.contains("³√") ||
                 calculation.contains("log") || calculation.contains("ln") || calculation.contains("sin") || calculation.contains("cos") ||
                 calculation.contains("tan") || calculation.contains("С") || calculation.contains("Ƥ") || calculation.contains("⁒") || calculation.contains("؉") ||
-                calculation.contains("Rec") || calculation.contains("Pol") || calculation.contains("RanInt(") || calculation.contains("Ran#");
+                calculation.contains("%") || calculation.contains("Rec") || calculation.contains("Pol") || calculation.contains("RanInt(") || calculation.contains("Ran#");
     }
 
     /**
@@ -961,7 +961,7 @@ public class CalculatorEngine {
         return token.contains("+") || token.contains("-") || token.contains("*") || token.contains("/") ||
                 token.contains("×") || token.contains("÷") ||
                 token.contains("^") || token.contains("√") || token.contains("!") || token.contains("³√") || token.contains("С") ||
-                token.contains("Ƥ") || token.contains("⁒") || token.contains("؉");
+                token.contains("Ƥ") || token.contains("⁒") || token.contains("؉") || token.contains("%");
     }
 
     /**
@@ -1227,6 +1227,10 @@ public class CalculatorEngine {
     public static BigDecimal mIsXPercentOfN(BigDecimal n, BigDecimal m) {
         MathContext mc = new MathContext(MC.getPrecision(), RoundingMode.HALF_UP);
         return m.divide(n, mc).multiply(new BigDecimal("100"));
+    }
+
+    public static int modulo(int n, int m) {
+        return n % m;
     }
 
     /**

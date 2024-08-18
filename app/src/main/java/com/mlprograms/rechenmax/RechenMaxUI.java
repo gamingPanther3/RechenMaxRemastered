@@ -13,6 +13,7 @@ import static com.mlprograms.rechenmax.ToastHelper.showToastShort;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -51,6 +52,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
+
+// force push to RechenMax Repo:
+//  git push --force --set-upstream https://github.com/gamingPanther3/RechenMax  master
 
 public class RechenMaxUI extends AppCompatActivity {
 
@@ -172,32 +177,28 @@ public class RechenMaxUI extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        formatCalculationText();
-
-        /* TODO
-        dataManager.saveToJSONSettings("appLanguage", "de", getApplicationContext());
-
         try {
             String savedLocale = dataManager.getJSONSettingsData("appLanguage", getApplicationContext()).getString("value");
-            if(!Objects.equals(getLocale(), savedLocale)) {
-                setLocale(savedLocale);
+            if(!getLocale().equals(savedLocale)) {
+                setLocale(this, savedLocale);
             }
         } catch (JSONException ex) {
             throw new RuntimeException(ex);
         }
-        */
+
+        formatCalculationText();
     }
 
-    public void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, RechenMaxUI.class);
-        finish();
-        startActivity(refresh);
+    public static void setLocale(Activity activtiy, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Resources resources = activtiy.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        activtiy.finish();
+        activtiy.startActivity(activtiy.getIntent());
     }
 
     public String getLocale() {
@@ -393,7 +394,7 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     public void openHelp(MenuItem item) {
-        // TODO
+        // TODO: open help activity
         ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
     }
 
@@ -403,7 +404,7 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     public void clearHistory(MenuItem item) {
-        // TODO
+        // TODO: clear history
         ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
     }
 
@@ -545,7 +546,6 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     private void deleteCharacter() {
-        // TODO
         EditText editText = findViewById(R.id.calculation_edittext);
         int cursorPosition = editText.getSelectionStart();
 
@@ -755,7 +755,7 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     private void addToHistory(String input) {
-        // TODO
+        // TODO: add calculation to history
         if(true) {
             return;
         }
@@ -769,24 +769,6 @@ public class RechenMaxUI extends AppCompatActivity {
         // Code snippet to save calculation to history
         final Context context = getApplicationContext();
 
-        String calculalation = parts[0];
-        String result = parts[1];
-
-        // TODO: ERROR MESSAGE
-        // FATAL EXCEPTION: main (Ask Gemini)
-        // Process: com.mlprograms.rechenmaxremastered, PID: 4352
-        // java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String org.json.JSONObject.getString(java.lang.String)' on a null object reference
-        // 	at com.mlprograms.rechenmaxremastered.RechenMaxUI.lambda$addToHistory$51$com-mlprograms-rechenmaxremastered-RechenMaxUI(RechenMaxUI.java:496)
-        // 	at com.mlprograms.rechenmaxremastered.RechenMaxUI$$ExternalSyntheticLambda22.run(D8$$SyntheticClass:0)
-        // 	at android.os.Handler.handleCallback(Handler.java:959)
-        // 	at android.os.Handler.dispatchMessage(Handler.java:100)
-        // 	at android.os.Looper.loopOnce(Looper.java:232)
-        // 	at android.os.Looper.loop(Looper.java:317)
-        // 	at android.app.ActivityThread.main(ActivityThread.java:8592)
-        // 	at java.lang.reflect.Method.invoke(Native Method)
-        // 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
-        // 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:878)
-
         new Thread(() -> runOnUiThread(() -> {
             try {
                 int old_value = Integer.parseInt(dataManager.getHistoryData("historyTextViewNumber", context).getString("value"));
@@ -794,7 +776,7 @@ public class RechenMaxUI extends AppCompatActivity {
                 int new_value = old_value + 1;
 
                 dataManager.updateValuesInHistoryData("historyTextViewNumber", "value", Integer.toString(new_value), context);
-                String calculate_text = calculalation;
+                String calculate_text = parts[0];
 
                 if (calculate_text.isEmpty()) {
                     calculate_text = "0";

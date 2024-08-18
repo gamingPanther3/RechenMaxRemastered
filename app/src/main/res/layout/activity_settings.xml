@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="@+id/settings_back_button"
             app:layout_constraintStart_toStartOf="@+id/settings_back_button"
             tools:ignore="MissingConstraints"
-            android:onClick="openRechenMaxUI"/>
+            android:onClick="openSettingsActivity"/>
 
         <TextView
             android:id="@+id/settings_back_button_text"

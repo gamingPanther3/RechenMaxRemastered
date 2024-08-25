@@ -74,6 +74,7 @@ import java.util.Map;
 //  | historyMode                      | single / multiple                | MainActivity                         |
 //  | historyModeAdvanced              | true / false                     | MainActivity                         |
 //  | showConverterDevelopmentMessage  | true / false                     | ConvertActivity                      |
+//  | startApp                         | true / false                     | MainActivity                         |
 //  | report                           | 'name' of person
 //                                       'title' of bug
 //                                       'text' (description) of bug      | ConvertActivity                      |
@@ -150,7 +151,10 @@ public class DataManager {
         // Declare a SettingsActivity object
     }
 
-    public DataManager(HelpActivity helpActivity) {
+    public DataManager(ConvertActivity convertActivity) {
+    }
+
+    public DataManager(HistoryActivity historyActivity) {
     }
 
     public DataManager(Converter converter) {
@@ -427,6 +431,7 @@ public class DataManager {
             initializeSetting("lastActivity", "Main", applicationContext);
             initializeSetting("calculationCount", "1", applicationContext);
             initializeSetting("maxNumbersWithoutScrolling", "6", applicationContext);
+            initializeSetting("startApp", "true", applicationContext);
 
             initializeSetting("variable_a", "", applicationContext);
             initializeSetting("variable_b", "", applicationContext);
@@ -488,6 +493,7 @@ public class DataManager {
                 addValueWithCustomNameToJSONSettings("convertMode", "DruckNumber",  "", applicationContext);
                 addValueWithCustomNameToJSONSettings("convertMode", "DrehmomentNumber",  "", applicationContext);
                 addValueWithCustomNameToJSONSettings("convertMode", "ArbeitNumber",  "", applicationContext);
+
             } else if(key.equals("report")) {
                 addValueWithCustomNameToJSONSettings("report", "name",  "", applicationContext);
                 addValueWithCustomNameToJSONSettings("report", "title",  "", applicationContext);
@@ -625,7 +631,7 @@ public class DataManager {
         }
     }
 
-    public void saveToHistory(String name, String date, String details, String calculation, Context applicationContext) {
+    public void saveToHistory(String name, String date, String details, String calculation, String result, Context applicationContext) {
         JSONObject jsonObj = new JSONObject();
         try {
             File file = new File(applicationContext.getFilesDir(), HISTORY_FILE);
@@ -644,6 +650,7 @@ public class DataManager {
             dataObj.put("date", date);
             dataObj.put("details", details);
             dataObj.put("calculation", calculation);
+            dataObj.put("result", result);
 
             jsonObj.put(name, dataObj);
 

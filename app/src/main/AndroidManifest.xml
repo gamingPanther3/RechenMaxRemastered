@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -34,13 +35,26 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".SettingsActivity"
             android:configChanges="locale|uiMode"
-
-        android:exported="false">
+            android:exported="false">
         </activity>
 
         <activity
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".ChangelogActivity"
+            android:configChanges="locale|uiMode"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".ConvertActivity"
+            android:configChanges="locale|uiMode"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".HistoryActivity"
             android:configChanges="locale|uiMode"
             android:exported="false">
         </activity>

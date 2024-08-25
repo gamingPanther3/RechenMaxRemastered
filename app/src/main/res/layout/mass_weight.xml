@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_gravity="bottom">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertFemtogramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertFemtogrammScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertFemtogrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertPicogramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertPicogrammScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertPicogrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertNanogramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertNanogrammScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertNanogrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertMikrogramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertMikrogrammScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertMikrogrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertMilligramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertMilligrammScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertMilligrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertGramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertGrammScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertGrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertKilogramm"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertKubikInchScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertKilogrammTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertTonne"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertTonneScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertTonneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertUnzen"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertUnzenScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertUnzenTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="35dp"
+            android:textStyle="italic"
+            android:textColor="@color/textColor"
+            android:text="@string/convertPfund"
+            android:textSize="17sp"
+            android:gravity="start|center_horizontal"/>
+
+        <HorizontalScrollView
+            android:id="@+id/convertPfundScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/convertPfundTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textStyle="italic"
+                android:textColor="@color/textColor"
+                android:text="@string/convertNull"
+                android:textSize="17sp"
+                android:layout_gravity="end|center_vertical"/>
+        </HorizontalScrollView>
+    </LinearLayout>
+</LinearLayout>

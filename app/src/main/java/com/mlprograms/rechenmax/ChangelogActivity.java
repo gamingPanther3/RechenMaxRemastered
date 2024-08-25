@@ -25,7 +25,7 @@ public class ChangelogActivity extends AppCompatActivity {
         });
     }
 
-    public void openSettingsActivity(View item) {
+    public void openRechenMaxUI(View item) {
         Intent intent = new Intent(ChangelogActivity.this, SettingsActivity.class);
         startActivity(intent);
     }

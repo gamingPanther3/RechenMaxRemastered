@@ -187,17 +187,10 @@ public class CalculatorEngine {
             }
 
             String finalResult = new BigDecimal(result[0]).stripTrailingZeros().toPlainString().replace('.', ',');
-            if (containsOperatorOrFunction(calculation)) {
-                return rechenmaxUI.formatNumber(shortedResult(finalResult));
-            } else {
-                return rechenmaxUI.formatNumber(finalResult);
-            }
+
+            return containsOperatorOrFunction(calculation) ? rechenmaxUI.formatNumber(shortedResult(finalResult)) : rechenmaxUI.formatNumber(finalResult);
         } catch (ArithmeticException e) {
-            if (Objects.equals(e.getMessage(), rechenmaxUI.getString(R.string.errorMessage1))) {
-                return rechenmaxUI.getString(R.string.errorMessage1);
-            } else {
-                return e.getMessage();
-            }
+            return Objects.equals(e.getMessage(), rechenmaxUI.getString(R.string.errorMessage1)) ? rechenmaxUI.getString(R.string.errorMessage1) : e.getMessage();
         } catch (IllegalArgumentException e) {
             return e.getMessage();
         } catch (Exception e) {
@@ -221,8 +214,8 @@ public class CalculatorEngine {
             String[] variableNames = {"A", "B", "C", "D", "E", "F", "G", "X", "Y", "Z"};
 
             for (int i = 0; i < variableKeys.length; i++) {
-                String value = dataManager.getJSONSettingsData(variableKeys[i], rechenmaxUI.getApplicationContext()).getString("value");
-                if (!value.isEmpty()) {
+                String value = "(" + dataManager.getJSONSettingsData(variableKeys[i], rechenmaxUI.getApplicationContext()).getString("value") + ")";
+                if (!value.equals("()")) {
                     calculation = calculation.replace(variableNames[i], value);
                 }
             }

@@ -139,8 +139,6 @@
     <string name="scientic_mode_degree" translatable="false">Deg</string>
     <string name="scientic_mode_radians" translatable="false">Rad</string>
 
-    <string name="actionbar_converter" translatable="false">Convert</string>
-    <string name="actionbar_history" translatable="false">History</string>
     <string name="actionbar_settings" translatable="false">⋮</string>
 
     <string name="dropdown_arrow_down" translatable="false">˅</string>
@@ -175,6 +173,174 @@
 
 
     <!-- Später übersetzen -->
+
+    <string name="converter">Umrechner</string>
+    <string name="openConverter">Umrechner öffnen</string>
+    <string name="openConverterText">Du kannst zum Umrechner wechseln, indem du oben auf den markierten Knopf klickst.</string>
+    <string name="closeConverter">Umrechner schließen</string>
+
+    <string name="convertAngle">Winkel</string>
+    <string name="convertArea">Fläche</string>
+    <string name="convertStorage">Digitaler Speicher</string>
+    <string name="convertDistance">Entfernung</string>
+    <string name="convertVolume">Volumen</string>
+    <string name="convertMassWeigth">Masse / Gewicht</string>
+    <string name="convertTime">Zeit</string>
+    <string name="temperature">Temperatur</string>
+    <string name="convertVoltage">Stromspannung</string>
+    <string name="convertCurrent">Stromstärke</string>
+    <string name="convertSpeed">Geschwindigkeit</string>
+    <string name="convertEnergy">Energie</string>
+    <string name="convertPressure">Druck</string>
+    <string name="convertTorque">Drehmoment</string>
+    <string name="mechanical_work">Mechanische Arbeit</string>
+
+    <string name="convert">Umrechnen</string>
+    <string name="convertTitle">Umrechner</string>
+    <string name="convertNull">0,00</string>
+
+    <string name="convertMessage">Bitte beachten Sie, dass der Umrechner sich immer noch in der Entwicklung befindet und möglicherweise falsche Ergebnisse liefern kann. Du kannst einen Fehler melden, indem du oben rechts in den Einstellungen auf die Flagge klickst, wenn du einen gefunden hast.</string>
+
+    <string name="settingsConverterDevelopmentMessage">Warnhinweis</string>
+    <string name="settingsConverterDevelopmentMessage_text">Hiermit kannst du einstellen, ob du jedes Mal den Warnhinweis angezeigt haben möchtest, der beim Starten des Umrechners angezeigt wird, um sicherzustellen, dass du über mögliche Risiken informiert bist.</string>
+
+    <string name="convertDeg">Grad (Deg)</string>
+    <string name="convertRad">Radian (Rad)</string>
+    <string name="convertMillirad">Milliradian (mRad)</string>
+    <string name="convertSquareMicrometer">Quadratmikrometer (µm²)</string>
+    <string name="convertSquareMillimeter">Quadratmillimeter (mm²)</string>
+    <string name="convertSquareCentimeter">Quadratzentimeter (cm²)</string>
+    <string name="convertSquareMeter">Quadratmeter (m²)</string>
+    <string name="convertSquareKilometer">Quadratkilometer (km²)</string>
+    <string name="convertAr">Ar (a)</string>
+    <string name="convertHectares">Hektar (ha)</string>
+    <string name="convertSquareInch">Quadrat-Inch (in²)</string>
+    <string name="convertSquareFeet">Quadrat-Feet (ft²)</string>
+    <string name="convertAcre">Acre (ac)</string>
+    <string name="convertBit">Bit (Bit)</string>
+    <string name="convertByte">Byte (Byte)</string>
+    <string name="convertKilobit">Kilobit (kbit)</string>
+    <string name="convertKilobyte">Kilobyte (kB)</string>
+    <string name="convertMegabit">Megabit (Mbit)</string>
+    <string name="convertMegabyte">Megabyte (MB)</string>
+    <string name="convertGigabit">Gigabit (Gbit)</string>
+    <string name="convertGigabyte">Gigabyte (GB)</string>
+    <string name="convertTerabit">Terabit (Tbit)</string>
+    <string name="convertTerabyte">Terabyte (TB)</string>
+    <string name="convertPetabit">Petabit (Pbit)</string>
+    <string name="convertPetabyte">Petabyte (PB)</string>
+    <string name="convertExabit">Exabit (Ebit)</string>
+    <string name="convertExabyte">Exabyte (EB)</string>
+    <string name="convertZetabit">Zetabit (Zbit)</string>
+    <string name="convertZetabyte">Zetabyte (ZB)</string>
+    <string name="convertYotabit">Yotabit (Ybit)</string>
+    <string name="convertYotabyte">Yotabyte (YB)</string>
+    <string name="convertAngstrom">Angstrom (Å)</string>
+    <string name="convertFemtometer">Femtometer (fm)</string>
+    <string name="convertParsec">Parsec (pc)</string>
+    <string name="convertPixel">Pixel (px)</string>
+    <string name="convertPoint">Point (pt)</string>
+    <string name="convertPica">Pica (p)</string>
+    <string name="convertEm">Quad (em)</string>
+    <string name="convertPikometer">Pikometer (pm)</string>
+    <string name="convertNanometer">Nanometer (nm)</string>
+    <string name="convertMikrometer">Mikrometer (µm)</string>
+    <string name="convertMillimeter">Millimeter (mm)</string>
+    <string name="convertCentimeter">Zentimeter (cm)</string>
+    <string name="convertDezimeter">Dezimeter (dm)</string>
+    <string name="convertMeter">Meter (m)</string>
+    <string name="convertHektometer">Hektometer (hm)</string>
+    <string name="convertKilometer">Kilometer (km)</string>
+    <string name="convertFeet">Feet (ft)</string>
+    <string name="convertYard">Yard (yd)</string>
+    <string name="convertInch">Inch (in)</string>
+    <string name="convertMiles">Meilen (mi)</string>
+    <string name="convertSeamiles">Seemeilen (sm)</string>
+    <string name="convertLightyear">Lichtjahr (ly)</string>
+    <string name="convertKubikmillimeter">Kubikmillimeter (mm³)</string>
+    <string name="convertKubikzentimeter">Kubikzentimeter (cm³)</string>
+    <string name="convertKubikdezimeter">Kubikdezimeter (dm³)</string>
+    <string name="convertKubikmeter">Kubikmeter (m³)</string>
+    <string name="convertKubikkilometer">Kubikkilometer (km³)</string>
+    <string name="convertMilliliter">Milliliter (ml)</string>
+    <string name="convertLiter">Liter (l)</string>
+    <string name="convertGallonUS">Gallon US (gal)</string>
+    <string name="convertKubikFeet">Kubik-Feet (ft³)</string>
+    <string name="convertKubikInch">Kubik-Inch (in³)</string>
+    <string name="convertFemtogramm">Femtogramm (fg)</string>
+    <string name="convertPicogramm">Picogramm (pg)</string>
+    <string name="convertNanogramm">Nanogramm (ng)</string>
+    <string name="convertMikrogramm">Mikrogramm (μg)</string>
+    <string name="convertMilligramm">Milligramm (mg)</string>
+    <string name="convertGramm">Gramm (g)</string>
+    <string name="convertKilogramm">Kilogramm (kg)</string>
+    <string name="convertTonne">Tonne (t)</string>
+    <string name="convertUnzen">Unzen (oz)</string>
+    <string name="convertPfund">Pfund (lb)</string>
+    <string name="convertJahr">Jahr (yr)</string>
+    <string name="convertMonat">Monat (mth)</string>
+    <string name="convertWoche">Woche (wk)</string>
+    <string name="convertTag">Tag (d)</string>
+    <string name="convertStunde">Stunde (h)</string>
+    <string name="convertMinute">Minute (m)</string>
+    <string name="convertSekunde">Sekunde (s)</string>
+    <string name="convertMillisekunde">Millisekunde (ms)</string>
+    <string name="convertMikrosekunde">Mikrosekunde (μs)</string>
+    <string name="convertNanosekunde">Nanosekunde (ns)</string>
+    <string name="convertPicosekunde">Picosekunde (ps)</string>
+    <string name="convertFemtosekunde">Femtosekunde (fs)</string>
+    <string name="convertCelsius">Celsius (°C)</string>
+    <string name="convertKelvin">Kelvin (K)</string>
+    <string name="convertFahrenheit">Fahrenheit (°F)</string>
+    <string name="convertMillivolt">Millivolt (mV)</string>
+    <string name="convertVolt">Volt (V)</string>
+    <string name="convertKilovolt">Kilovolt (kV)</string>
+    <string name="convertMegavolt">Megavolt (MV)</string>
+    <string name="convertPicoampere">Picoampere (pA)</string>
+    <string name="convertNanoampere">Nanoampere (nA)</string>
+    <string name="convertMikroampere">Mikroampere (μA)</string>
+    <string name="convertMilliampere">Milliampere (mA)</string>
+    <string name="convertAmpere">Ampere (A)</string>
+    <string name="convertKiloAmpere">KiloAmpere (kA)</string>
+    <string name="convertMillimeterProSekunde">Millimeter/Sekunde (mm/s)</string>
+    <string name="convertMeterProSekunde">Meter/Sekunde (m/s)</string>
+    <string name="convertKilometerProStunde">Kilometer/Stunde (km/h)</string>
+    <string name="convertMilesProStunde">Miles/Stunde (mph)</string>
+    <string name="convertKnoten">Knoten (kt)</string>
+    <string name="convertMach">Mach (M)</string>
+    <string name="convertMillijoule">Millijoule (mJ)</string>
+    <string name="convertJoule">Joule (J)</string>
+    <string name="convertKilojoule">Kilojoule (kJ)</string>
+    <string name="convertMegajoule">Megajoule (MJ)</string>
+    <string name="convertKalorie">Kalorie (cal)</string>
+    <string name="convertKilokalorie">Kilokalorie (kcal)</string>
+    <string name="convertWattsekunde">Wattsekunde (W/s)</string>
+    <string name="convertWattstunde">Wattstunde (W/h)</string>
+    <string name="convertKilowattsekunde">Kilowattsekunde (kW/s)</string>
+    <string name="convertKilowattstunde">Kilowattstunde (kW/h)</string>
+    <string name="convertMillipascal">Millipascal (mPa)</string>
+    <string name="convertPascal">Pascal (Pa)</string>
+    <string name="convertHectopascal">Hectopascal (hPa)</string>
+    <string name="convertKilopascal">Kilopascal (kPa)</string>
+    <string name="convertBar">Bar (bar)</string>
+    <string name="convertMillibar">Millibar (mbar)</string>
+    <string name="convertTorr">Torr (Torr)</string>
+    <string name="convertPSI">PSI (psi)</string>
+    <string name="convertPSF">PSF (psf)</string>
+    <string name="convertNewtonMeter">Newton Meter (Nm)</string>
+    <string name="convertMeterKilogramm">Meter Kilogram (m kg)</string>
+    <string name="convertFootPound">Foot-Pound (ft lbf)</string>
+    <string name="convertInchPound">Inch-Pound (in lbf)</string>
+    <string name="convertMilliwatt">Milliwatt (mW)</string>
+    <string name="convertWatt">Watt (W)</string>
+    <string name="convertKilowatt">Kilowatt (kW)</string>
+    <string name="convertMegawatt">Megawatt (MW)</string>
+    <string name="convertGigawatt">Gigawatt (GW)</string>
+    <string name="convertPferdestaerke">Pferdestärke (hp)</string>
+    <string name="convertJouleProSekunde">Joule pro Sekunde (J/s)</string>
+    <string name="converterPlaceHolder">Gib hier einen Wert ein</string>
+
+    <string name="savedvalue">Wert gespeichert ...</string>
 
     <string name="tooltip_clear_clipboard">Zwischenablage leeren</string>
     <string name="tooltip_paste_clipboard">Zwischenablage einfügen</string>
@@ -344,5 +510,13 @@
     <string name="changelog_new_edit">Bearbeitungsmöglichkeiten</string>
     <string name="changelog_new_edit_description">Mit der neuen Benutzeroberfläche kann man nun auch die Berechnungen nicht nur besser sondern auf effizienter bearbeiten.</string>
     <string name="changelog_variables">Variablen</string>
-    <string name="changelog_variables_description">Von nun an können auch Werte sowie Berechnungen in Variablen gespeichert werden</string>
+    <string name="changelog_variables_description">Von nun an können auch Werte sowie Berechnungen in Variablen gespeichert werden.</string>
+    <string name="changelog_history">Verlauf</string>
+    <string name="changelog_history_description">Alte Berchnungen können nun an in dem neuen Verlauf aufgerufen werden.</string>
+    <string name="changelog_converter">Umrechner</string>
+    <string name="changelog_converter_description">Einheiten können extrem leicht in dem Umrechner umgewandelt.</string>
+
+    <string name="actionbar_history">Verlauf aufrufen</string>
+    <string name="tooltip_returnToCalculatorUI">Zurück zum Taschenrechner</string>
+    <string name="cleared_history">Verlauf wurde erfolgreich geleert</string>
 </resources>

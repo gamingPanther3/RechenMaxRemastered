@@ -61,38 +61,39 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="12dp"
-                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0.5"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="6dp"
                 app:strokeWidth="0dp" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/actionbar_history_card"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
+                android:layout_weight="3.5"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="6dp"
-                app:strokeWidth="0dp" />
+                app:strokeWidth="0dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="6dp"
-                app:strokeWidth="0dp" />
+                <TextView
+                    android:id="@+id/actionbar_history_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.4"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:gravity="center"
+                    android:text="@string/actionbar_history"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:tooltipText="@string/tooltip_actionbar_scientic_mode"
+                    app:autoSizeMaxTextSize="30sp"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
+                    android:onClick="openHistoryUI"
+                    app:cornerRadius="12dp" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="6dp"
-                app:strokeWidth="0dp" />
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"

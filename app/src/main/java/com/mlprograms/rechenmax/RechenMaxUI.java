@@ -3,7 +3,6 @@ package com.mlprograms.rechenmax;
 import static com.mlprograms.rechenmax.CalculatorEngine.containsAnyVariable;
 import static com.mlprograms.rechenmax.CalculatorEngine.fixExpression;
 import static com.mlprograms.rechenmax.CalculatorEngine.getVariables;
-import static com.mlprograms.rechenmax.CalculatorEngine.isNumber;
 import static com.mlprograms.rechenmax.CalculatorEngine.isOperator;
 import static com.mlprograms.rechenmax.NumberHelper.PI;
 import static com.mlprograms.rechenmax.NumberHelper.e;
@@ -25,7 +24,6 @@ import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,6 +41,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
 import org.json.JSONException;
@@ -52,10 +52,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Objects;
 
 // force push to RechenMax Repo:
-//  git push --force --set-upstream https://github.com/gamingPanther3/RechenMax  master
+// git push --force --set-upstream https://github.com/gamingPanther3/RechenMax master
 
 public class RechenMaxUI extends AppCompatActivity {
 
@@ -95,19 +94,22 @@ public class RechenMaxUI extends AppCompatActivity {
             "³√(", "ln(", "tanh⁻¹(", "cosh⁻¹(", "sinh⁻¹(", "tan⁻¹(", "cos⁻¹(", "sin⁻¹(",
             "tanh(", "cosh(", "sinh(", "tan(", "cos(", "sin(", "√(", "Pol(", "Rec(",
             "RanInt(", "Ran#", ".0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9", "!",
-            "%", "×", "÷", "+", "-", "½", "⅓", "¼", "⅕", "⅒", "%×", "%*", "⁒", "π", "е", "E"
+            "%", "×", "÷", "+", "-", "½", "⅓", "¼", "⅕", "⅒", "%×", "%*", "⁒", "π", "е", "E",
+            "log₀(", "log₁(", "log₂(", "log₃(", "log₄(", "log₅(", "log₆(", "log₇(", "log₈(", "log₉("
     };
 
     private static final String[] operatorsFormatCalculationText = {
             "³√(", "ln(", "tanh⁻¹(", "cosh⁻¹(", "sinh⁻¹(", "tan⁻¹(", "cos⁻¹(", "sin⁻¹(",
             "tanh(", "cosh(", "sinh(", "tan(", "cos(", "sin(", "√(", "Pol(", "Rec(",
             "RanInt(", "Ran#", "!", "(", ")",
+            "log₀(", "log₁(", "log₂(", "log₃(", "log₄(", "log₅(", "log₆(", "log₇(", "log₈(", "log₉(",
             "%", "×", "÷", "+", "-", "½", "⅓", "¼", "⅕", "⅒", "%×", "%*", "⁒", "π", "е", "E"
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calculator_ui);
 
         EdgeToEdge.enable(this);
@@ -128,6 +130,8 @@ public class RechenMaxUI extends AppCompatActivity {
         dataManager = new DataManager(this);
         dataManager.initializeSettings(getApplicationContext());
         CalculatorEngine.setRechenMaxUI(this);
+
+        Log.e("DEBUG", String.valueOf(dataManager.getAllData(getApplicationContext())));
 
         try {
             if (dataManager.getJSONSettingsData("maxNumbersWithoutScrolling", getApplicationContext()).getString("value").isEmpty()) {
@@ -165,9 +169,6 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         try {
-            setCalculateText("");
-            setResultText("");
-
             JSONObject resultText = dataManager.getJSONSettingsData("result_text", rechenMaxUI.getApplicationContext());
             JSONObject calculateText = dataManager.getJSONSettingsData("calculate_text", rechenMaxUI.getApplicationContext());
 
@@ -178,15 +179,40 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         try {
-            String savedLocale = dataManager.getJSONSettingsData("appLanguage", getApplicationContext()).getString("value");
-            if(!getLocale().equals(savedLocale)) {
-                setLocale(this, savedLocale);
+            if(dataManager.getJSONSettingsData("startApp", getApplicationContext()).getString("value").equals("true")) {
+                String savedLocale = dataManager.getJSONSettingsData("appLanguage", getApplicationContext()).getString("value");
+                if(!getLocale().equals(savedLocale)) {
+                    setLocale(this, savedLocale);
+                }
             }
         } catch (JSONException ex) {
             throw new RuntimeException(ex);
         }
 
         formatCalculationText();
+    }
+
+    public void loadHistoryFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Lade das neue Fragment mit Animationen
+        transaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+        transaction.replace(R.id.RechenMaxUI, new HistoryFragment());
+        transaction.addToBackStack(null); // Optional, um die Rückkehr zum vorherigen Fragment zu ermöglichen
+        transaction.commit();
+    }
+
+    public void loadHistoryActivity() {
+        Intent intent = new Intent(RechenMaxUI.this, HistoryActivity.class);
+        startActivity(intent);
+        // Setze die Animationen für den Wechsel von MainActivity zu HistoryActivity
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dataManager.saveToJSONSettings("startApp", "true", getApplicationContext());
     }
 
     public static void setLocale(Activity activtiy, String languageCode) {
@@ -248,6 +274,7 @@ public class RechenMaxUI extends AppCompatActivity {
         });
 
         setActionButtonListener(R.id.actionbar_scientic_mode_textview, this::changeScientificMode);
+        setActionButtonListener(R.id.actionbar_history_textview, this::openHistory);
         setActionButtonListener(R.id.actionbar_menu_textview, this::openMenu);
 
         setActionButtonListener(R.id.clear_clipboard_textview, this::clearClipboard);
@@ -388,6 +415,21 @@ public class RechenMaxUI extends AppCompatActivity {
         popup.show();
     }
 
+    private void openHistory() {
+
+        HistoryActivity.rechenMaxUI = this;
+        Intent intent = new Intent(RechenMaxUI.this, HistoryActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+
+/*
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.RechenMaxUI, new NewFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();*/
+    }
+
     public void openAbout(MenuItem item) {
         Intent intent = new Intent(RechenMaxUI.this, AboutActivity.class);
         startActivity(intent);
@@ -404,8 +446,17 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     public void clearHistory(MenuItem item) {
-        // TODO: clear history
-        ToastHelper.showToastShort(getString(R.string.actionbar_function_is_not_available), getApplicationContext());
+        dataManager.clearHistory(this);
+        dataManager.saveToHistory("historyTextViewNumber", "0", getApplicationContext());
+
+        ToastHelper.showToastShort(getString(R.string.cleared_history), getApplicationContext());
+    }
+
+    public void openConverter(MenuItem item) {
+        ConvertActivity.setMainActivityContext(this);
+
+        Intent intent = new Intent(RechenMaxUI.this, ConvertActivity.class);
+        startActivity(intent);
     }
 
     private void adjustCursorPosition(EditText editText) {
@@ -547,6 +598,7 @@ public class RechenMaxUI extends AppCompatActivity {
 
     private void deleteCharacter() {
         EditText editText = findViewById(R.id.calculation_edittext);
+        Editable editable = editText.getText();
         int cursorPosition = editText.getSelectionStart();
 
         if(editText.getText().toString().isEmpty()) {
@@ -558,10 +610,8 @@ public class RechenMaxUI extends AppCompatActivity {
             return;
         }
 
-        Editable editable = editText.getText();
-
         if (!editText.isFocused()) {
-            cursorPosition = editable.length();
+            editText.setSelection(editText.getText().length());
             scrollToEnd(findViewById(R.id.calculation_horizontal_scroll_view));
         }
 
@@ -570,29 +620,30 @@ public class RechenMaxUI extends AppCompatActivity {
 
             if (editable.charAt(deleteFrom) != '(') {
                 editable.delete(deleteFrom, deleteFrom + 1);
-                editText.setSelection(Math.min(editText.length(), deleteFrom));
+                editText.setSelection(Math.min(editText.getText().length(), deleteFrom));
+
             } else {
                 while (deleteFrom >= 0) {
-                    char charToDelete = editable.charAt(deleteFrom);
+                    char charToDelete = editText.getText().charAt(deleteFrom);
+
                     if (isOperator(String.valueOf(charToDelete)) || isOperator(String.valueOf(charToDelete))) {
                         break;
                     }
-                    if (charToDelete == '(' || Character.isLowerCase(charToDelete) || charToDelete == '⁻' || charToDelete == '¹') {
-                        editable.delete(deleteFrom, deleteFrom + 1);
+
+                    if (Character.isLowerCase(charToDelete) || Character.isUpperCase(charToDelete) || charToDelete == '(' || charToDelete == '⁻' || charToDelete == '¹' || charToDelete == '₂' || charToDelete == '#') {
+                        editText.setText(editable.delete(deleteFrom, deleteFrom + 1));
                         editText.setSelection(deleteFrom);
                     }
                     deleteFrom--;
 
                     if (deleteFrom - 1 > 0) {
-                        if(editable.charAt(deleteFrom) == '(') {
+                        if(editable.charAt(deleteFrom) == '(' || editable.charAt(deleteFrom) == '#') {
                             break;
                         }
                     }
                 }
             }
         }
-
-
     }
 
     private void negate() {
@@ -653,13 +704,10 @@ public class RechenMaxUI extends AppCompatActivity {
 
             String number = calculateText.substring(numberStart, numberEnd);
 
-            // Überprüfung, ob die Zahl bereits negiert ist
             if (numberStart - 2 >= 0 && calculateText.charAt(numberStart - 2) == '(' && calculateText.charAt(numberStart - 1) == '-' && numberEnd < calculateText.length() && calculateText.charAt(numberEnd) == ')') {
-                // Wenn Klammern vorhanden sind, entferne sie
                 calculateText = calculateText.substring(0, numberStart - 2) + number + calculateText.substring(numberEnd + 1);
                 cursorPosition -= 2; // Korrigiere die Cursorposition
             } else {
-                // Andernfalls füge die Negierung hinzu
                 calculateText = new StringBuilder(calculateText).insert(numberEnd, ")").insert(numberStart, "(-").toString();
                 cursorPosition += 2; // Korrigiere die Cursorposition
             }
@@ -716,6 +764,9 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         String calculation = CalculatorEngine.calculate(getCalculateText());
+
+        addToHistory(fixExpression(balanceParentheses(getCalculateText())), CalculatorEngine.calculate(getCalculateText()));
+
         if(!getCalculateText().contains("Ran")) {
             if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 setCalculateText(calculation);
@@ -736,6 +787,8 @@ public class RechenMaxUI extends AppCompatActivity {
         }
         resultTextview.setAlpha(0.6f);
 
+        // TODO: ???
+        /*
         if(!isNumber(getCalculateText()) && (!getCalculateText().replace("=", "").replace(" ", "").equals("π") ||
                 !getCalculateText().replace("=", "").replace(" ", "").equals("e"))
                 && !isErrorMessage(getResultText())
@@ -746,7 +799,9 @@ public class RechenMaxUI extends AppCompatActivity {
                 .replace(",", "")).isEmpty()) {
 
             addToHistory(fixExpression(balanceParentheses(getCalculateText())) + "=" + getResultText());
+            System.out.println(dataManager.getAllDataFromHistory(getApplicationContext()).toString());
         }
+         */
 
         formatCalculationText();
         setTextColorAccordingToCalculation();
@@ -754,17 +809,11 @@ public class RechenMaxUI extends AppCompatActivity {
         calculation_edittext.setSelection(getCalculateText().length());
     }
 
-    private void addToHistory(String input) {
-        // TODO: add calculation to history
-        if(true) {
-            return;
-        }
-
+    private void addToHistory(String calculation, String result) {
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm - dd. MMMM yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd. MMMM yyyy", Locale.getDefault());
         String formattedDate = dateFormat.format(calendar.getTime());
-        String[] parts = input.replace(" ", "").split("=");
 
         // Code snippet to save calculation to history
         final Context context = getApplicationContext();
@@ -772,12 +821,11 @@ public class RechenMaxUI extends AppCompatActivity {
         new Thread(() -> runOnUiThread(() -> {
             try {
                 int old_value = Integer.parseInt(dataManager.getHistoryData("historyTextViewNumber", context).getString("value"));
-
                 int new_value = old_value + 1;
 
                 dataManager.updateValuesInHistoryData("historyTextViewNumber", "value", Integer.toString(new_value), context);
-                String calculate_text = parts[0];
 
+                String calculate_text = calculation;
                 if (calculate_text.isEmpty()) {
                     calculate_text = "0";
                 }
@@ -786,26 +834,12 @@ public class RechenMaxUI extends AppCompatActivity {
                 }
 
                 dataManager.saveToHistory(String.valueOf(old_value + 1), formattedDate, "",
-                        balanceParentheses(fixExpression(calculate_text)) + "=" + formatNumber(parts[1]), context);
+                        balanceParentheses(fixExpression(calculate_text)), formatNumber(result), context);
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         })).start();
-    }
-
-    private String removeNumbers(String calculation) {
-        if(calculation.isEmpty()) {
-            return "";
-        }
-
-        StringBuilder formattedCalculation = new StringBuilder();
-        for(int x = 0; x < calculation.length(); x++) {
-            if(!Character.isDigit(calculation.charAt(x))) {
-                formattedCalculation.append(calculation.charAt(x));
-            }
-        }
-
-        return formattedCalculation.toString();
     }
 
     private void calculateIfIsNotInvalidCalculation() {

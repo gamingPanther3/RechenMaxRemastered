@@ -92,7 +92,7 @@ public class HistoryActivity extends AppCompatActivity {
 
                         LinearLayout linearLayout = createCustomLayout(this, calculation, result);
                         linearLayout.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
-                        history_layout.addView(linearLayout, history_layout.getChildCount() - 1);
+                        history_layout.addView(linearLayout, history_layout.getChildCount());
                     }
                 }
                 count++;

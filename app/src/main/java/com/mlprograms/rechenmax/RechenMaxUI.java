@@ -446,10 +446,13 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     public void clearHistory(MenuItem item) {
-        dataManager.clearHistory(this);
-        dataManager.saveToHistory("historyTextViewNumber", "0", getApplicationContext());
-
-        ToastHelper.showToastShort(getString(R.string.cleared_history), getApplicationContext());
+        try {
+            dataManager.clearHistory(this);
+            dataManager.saveToHistory("historyTextViewNumber", "0", getApplicationContext());
+            ToastHelper.showToastShort(getString(R.string.cleared_history), getApplicationContext());
+        } catch (Exception e) {
+            ToastHelper.showToastShort(getString(R.string.cleared_history_error), getApplicationContext());
+        }
     }
 
     public void openConverter(MenuItem item) {
@@ -618,7 +621,7 @@ public class RechenMaxUI extends AppCompatActivity {
         if(cursorPosition > 0) {
             int deleteFrom = cursorPosition - 1;
 
-            if (editable.charAt(deleteFrom) != '(') {
+            if (editable.charAt(deleteFrom) != '(' && editable.charAt(deleteFrom) != '#') {
                 editable.delete(deleteFrom, deleteFrom + 1);
                 editText.setSelection(Math.min(editText.getText().length(), deleteFrom));
 

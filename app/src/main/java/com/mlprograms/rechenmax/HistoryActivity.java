@@ -23,8 +23,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.NestedScrollView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,12 +58,15 @@ public class HistoryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         dataManager = new DataManager(rechenMaxUI);
 
         System.out.println(dataManager.getAllDataFromHistory(rechenMaxUI.getApplicationContext()));
 
         createTextViews();
+
+        // scroll to bottom
+        NestedScrollView nestedScrollView = findViewById(R.id.historyUI);
+        ScrollUtils.smoothScrollToBottom(nestedScrollView, 1500, 1000);
     }
 
     public void createTextViews() {
@@ -74,6 +80,7 @@ public class HistoryActivity extends AppCompatActivity {
             String calculation;
             String result;
 
+            LinearLayout history_layout = findViewById(R.id.history_layout);
             while (count <= maxValue) {
                 JSONObject historyData = dataManager.getHistoryData(String.valueOf(count), rechenMaxUI.getApplicationContext());
 
@@ -83,7 +90,6 @@ public class HistoryActivity extends AppCompatActivity {
                     result = dataManager.getHistoryData(String.valueOf(count), rechenMaxUI.getApplicationContext()).getString("result");
 
                     if(!date.isEmpty() && !calculation.isEmpty() && !result.isEmpty()) {
-                        LinearLayout history_layout = findViewById(R.id.history_layout);
                         if (!tempDate.equals(date)) {
                             tempDate = date;
 
@@ -97,10 +103,31 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 count++;
             }
+            history_layout.addView(createSpaceTextView(this), history_layout.getChildCount());
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public TextView createSpaceTextView(Context context) {
+        TextView dateTextView = new TextView(context);
+        dateTextView.setId(View.generateViewId());
+        dateTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        dateTextView.setText(" ");
+        dateTextView.setTextColor(context.getResources().getColor(R.color.colorButtonClipboard));
+        dateTextView.setGravity(Gravity.CENTER);
+        dateTextView.setTypeface(ResourcesCompat.getFont(context, R.font.work_sans_bold));
+
+        // Setzen der Margins
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) dateTextView.getLayoutParams();
+        params.setMargins(0, 0, 0, 100);
+        dateTextView.setLayoutParams(params);
+
+        return dateTextView;
     }
 
     public TextView createDateTextView(Context context, String dateText) {

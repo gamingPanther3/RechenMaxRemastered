@@ -519,4 +519,5 @@
     <string name="actionbar_history">Verlauf aufrufen</string>
     <string name="tooltip_returnToCalculatorUI">Zurück zum Taschenrechner</string>
     <string name="cleared_history">Verlauf wurde erfolgreich geleert</string>
+    <string name="cleared_history_error">Beim leeren ist ein Fehler aufgetreten.</string>
 </resources>

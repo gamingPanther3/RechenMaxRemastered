@@ -1,15 +1,20 @@
 package com.mlprograms.rechenmax;
 
 import static com.mlprograms.rechenmax.CalculatorEngine.containsAnyVariable;
+import static com.mlprograms.rechenmax.CalculatorEngine.containsOperationCharacter;
 import static com.mlprograms.rechenmax.CalculatorEngine.fixExpression;
 import static com.mlprograms.rechenmax.CalculatorEngine.getVariables;
+import static com.mlprograms.rechenmax.CalculatorEngine.isFixExpression;
+import static com.mlprograms.rechenmax.CalculatorEngine.isNumber;
 import static com.mlprograms.rechenmax.CalculatorEngine.isOperator;
+import static com.mlprograms.rechenmax.CalculatorEngine.isSymbol;
 import static com.mlprograms.rechenmax.NumberHelper.PI;
 import static com.mlprograms.rechenmax.NumberHelper.e;
 import static com.mlprograms.rechenmax.ParenthesesBalancer.balanceParentheses;
 import static com.mlprograms.rechenmax.ToastHelper.showToastLong;
 import static com.mlprograms.rechenmax.ToastHelper.showToastShort;
 
+import android.Manifest;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,10 +22,12 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,10 +45,10 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 
@@ -55,6 +62,11 @@ import java.util.Locale;
 
 // force push to RechenMax Repo:
 // git push --force --set-upstream https://github.com/gamingPanther3/RechenMax master
+
+// TODO: insertPI
+// TODO: reminder
+// TODO: daily hints
+// TODO: fix expression
 
 public class RechenMaxUI extends AppCompatActivity {
 
@@ -131,7 +143,7 @@ public class RechenMaxUI extends AppCompatActivity {
         dataManager.initializeSettings(getApplicationContext());
         CalculatorEngine.setRechenMaxUI(this);
 
-        Log.e("DEBUG", String.valueOf(dataManager.getAllData(getApplicationContext())));
+        //Log.e("DEBUG", String.valueOf(dataManager.getAllData(getApplicationContext())));
 
         try {
             if (dataManager.getJSONSettingsData("maxNumbersWithoutScrolling", getApplicationContext()).getString("value").isEmpty()) {
@@ -213,6 +225,60 @@ public class RechenMaxUI extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         dataManager.saveToJSONSettings("startApp", "true", getApplicationContext());
+    }
+
+    /**
+     * onPause method is called when the activity is paused.
+     * It starts the background service.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            startBackgroundService();
+        }
+    }
+
+    /**
+     * onResume method is called when the activity is resumed.
+     * It stops the background service.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        stopBackgroundService();
+        formatCalculationText();
+    }
+
+    /**
+     * This method stops the background service.
+     * It creates an intent to stop the BackgroundService and calls stopService() with that intent.
+     * This method is typically called when the activity is being destroyed or when it's no longer necessary to run the background service.
+     */
+    private void stopBackgroundService() {
+        try {
+            Intent serviceIntent = new Intent(this, BackgroundService.class);
+            stopService(serviceIntent);
+        } catch (Exception e) {
+            Log.e("stopBackgroundService", e.toString());
+        }
+    }
+
+    /**
+     * This method starts a background service if the necessary permission is granted.
+     * It checks if the app has the required permission to post notifications.
+     * If the permission is granted, it starts the BackgroundService.
+     * This method is typically called when the window loses focus.
+     */
+    private void startBackgroundService() {
+        stopBackgroundService();
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                startService(new Intent(this, BackgroundService.class));
+            }
+        } catch (Exception e) {
+            Log.e("startBackgoundService", e.toString());
+        }
     }
 
     public static void setLocale(Activity activtiy, String languageCode) {
@@ -462,6 +528,7 @@ public class RechenMaxUI extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // do not touch it
     private void adjustCursorPosition(EditText editText) {
         int cursorPosition = editText.getSelectionStart();
         String text = editText.getText().toString();
@@ -519,6 +586,12 @@ public class RechenMaxUI extends AppCompatActivity {
             formatCalculationText();
         }
 
+        int count = Integer.parseInt(String.valueOf(fixExpressionWithCount(getCalculateText()).charAt(0)));
+        if(count != 0) {
+            setCalculateText(fixExpression(getCalculateText()));
+            editText.setSelection(editText.getSelectionStart() + count);
+        }
+
         setTextColorAccordingToCalculation();
         resetCalculatePressed();
 
@@ -537,6 +610,40 @@ public class RechenMaxUI extends AppCompatActivity {
             editText.setSelection(editText.getText().length());
         }
     }
+
+    public static String fixExpressionWithCount(String input) {
+        //Log.i("fixExpression", "Input fixExpression: " + input);
+
+        int appendedMultiply = 0;
+
+        // Step 1: Fix the expression using the original logic
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            String currentChar = String.valueOf(input.charAt(i));
+            String nextChar = "";
+
+            if (i + 1 < input.length()) {
+                nextChar = String.valueOf(input.charAt(i + 1));
+            }
+
+            stringBuilder.append(currentChar);
+            //Log.e("fixExpression", "CurrentChar: " + currentChar + " NextChar: " + nextChar);
+            //Log.e("fixExpression", "stringBuilder: " + stringBuilder);
+
+            if (!nextChar.isEmpty() && isFixExpression(currentChar, nextChar)) {
+                appendedMultiply++;
+                stringBuilder.append('×');
+            }
+        }
+
+        // Step 2: Handle the specific case of "-+"
+        String fixedExpression = stringBuilder.toString();
+        fixedExpression = fixedExpression.replaceAll("-\\+", "-");
+
+        Log.e("fixExpression", "Fixed Expression: " + fixedExpression);
+        return stringBuilder.toString().isEmpty() ? appendedMultiply + input : appendedMultiply + fixedExpression;
+    }
+
     private void setTextColorAccordingToCalculation() {
         if(!getResultText().isEmpty() && (isErrorMessage(getResultText()) || isErrorMessage(getCalculateText()))) {
             calculation_edittext.setTextColor(Color.parseColor(hexColorErrorMessageRed));
@@ -767,8 +874,7 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         String calculation = CalculatorEngine.calculate(getCalculateText());
-
-        addToHistory(fixExpression(balanceParentheses(getCalculateText())), CalculatorEngine.calculate(getCalculateText()));
+        addToHistory(fixExpression(balanceParentheses(getCalculateText())), calculation);
 
         if(!getCalculateText().contains("Ran")) {
             if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -789,22 +895,6 @@ public class RechenMaxUI extends AppCompatActivity {
             }
         }
         resultTextview.setAlpha(0.6f);
-
-        // TODO: ???
-        /*
-        if(!isNumber(getCalculateText()) && (!getCalculateText().replace("=", "").replace(" ", "").equals("π") ||
-                !getCalculateText().replace("=", "").replace(" ", "").equals("e"))
-                && !isErrorMessage(getResultText())
-                && !removeNumbers(getCalculateText()
-                .replace(" ", "")
-                .replace("=", "")
-                .replace(".", "")
-                .replace(",", "")).isEmpty()) {
-
-            addToHistory(fixExpression(balanceParentheses(getCalculateText())) + "=" + getResultText());
-            System.out.println(dataManager.getAllDataFromHistory(getApplicationContext()).toString());
-        }
-         */
 
         formatCalculationText();
         setTextColorAccordingToCalculation();
@@ -837,7 +927,7 @@ public class RechenMaxUI extends AppCompatActivity {
                 }
 
                 dataManager.saveToHistory(String.valueOf(old_value + 1), formattedDate, "",
-                        balanceParentheses(fixExpression(calculate_text)), formatNumber(result), context);
+                        balanceParentheses(fixExpression(calculate_text)), (result.contains("=") ? result : formatNumber(result)), context);
 
             } catch (JSONException e) {
                 throw new RuntimeException(e);

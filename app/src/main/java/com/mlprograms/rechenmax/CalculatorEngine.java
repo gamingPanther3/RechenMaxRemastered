@@ -735,18 +735,7 @@ public class CalculatorEngine {
                 //Log.e("fixExpression", "CurrentChar: " + currentChar + " NextChar: " + nextChar);
                 //Log.e("fixExpression", "stringBuilder: " + stringBuilder);
                 
-                if (
-                    !nextChar.isEmpty() &&
-                    (
-                        (isSymbol(currentChar) && isNumber(nextChar))   ||
-                        (isNumber(currentChar) && isSymbol(nextChar))   ||
-                        (isSymbol(currentChar) && isSymbol(nextChar)) ||
-                        (isNumber(currentChar) && nextChar.equals("(")) ||
-                        (currentChar.equals(")") && isNumber(nextChar))
-                    )
-                )
-
-                {
+                if (!nextChar.isEmpty() && isFixExpression(currentChar, nextChar)) {
                     stringBuilder.append('×');
                 }
             }
@@ -758,6 +747,34 @@ public class CalculatorEngine {
 
         //Log.e("fixExpression", "Fixed Expression: " + fixedExpression);
         return stringBuilder.toString().isEmpty() ? input : fixedExpression;
+    }
+
+    public static boolean isFixExpression(String currentChar, String nextChar) {
+        String list = "ABCDEFGXYZ";
+        String list2 = "lsctRP";
+
+        return (isSymbol(currentChar) && isNumber(nextChar))   ||
+                (isNumber(currentChar) && isSymbol(nextChar))   ||
+                (isSymbol(currentChar) && isSymbol(nextChar))   ||
+                (isNumber(currentChar) && containsOperationCharacter(nextChar.charAt(0)))   ||
+                (containsOperationCharacter(currentChar.charAt(0)) && isNumber(nextChar))   ||
+                (list.contains(String.valueOf(currentChar.charAt(0))) && list2.contains(String.valueOf(nextChar.charAt(0))))   ||
+                (isNumber(currentChar) && nextChar.equals("(")) ||
+                (currentChar.equals(")") && isNumber(nextChar));
+    }
+
+    static boolean containsOperationCharacter(char s) {
+        char[] list = {'l', 'o', 'g', 's', 'i', 'n', 'h', 'c', 't', '#', 'r', '⁻', '¹', 'p', 'e',
+                'a', 'b', 'd', 'f', 'x', 'y', 'z',
+                '₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'
+        };
+
+        for(char string : list) {
+            if(String.valueOf(string).equals(String.valueOf(Character.toLowerCase(s)))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -886,16 +903,16 @@ public class CalculatorEngine {
     }
 
     /**
-     * @param calculation The text to be checked.
+     * @param string The text to be checked.
      * @return true if the token represents a non-functional operator, false otherwise.
      */
-    public static boolean containsOperatorOrFunction(final String calculation) {
-        return calculation.contains("+") || calculation.contains("-") || calculation.contains("*") || calculation.contains("/") ||
-                calculation.contains("×") || calculation.contains("÷") || calculation.contains("π") || calculation.contains("е") ||
-                calculation.contains("^") || calculation.contains("√") || calculation.contains("!") || calculation.contains("³√") ||
-                calculation.contains("log") || calculation.contains("ln") || calculation.contains("sin") || calculation.contains("cos") ||
-                calculation.contains("tan") || calculation.contains("С") || calculation.contains("Ƥ") || calculation.contains("⁒") || calculation.contains("؉") ||
-                calculation.contains("%") || calculation.contains("Rec") || calculation.contains("Pol") || calculation.contains("RanInt(") || calculation.contains("Ran#");
+    public static boolean containsOperatorOrFunction(final String string) {
+        return string.contains("+") || string.contains("-") || string.contains("*") || string.contains("/") ||
+                string.contains("×") || string.contains("÷") || string.contains("π") || string.contains("е") ||
+                string.contains("^") || string.contains("√") || string.contains("!") || string.contains("³√") ||
+                string.contains("log") || string.contains("ln") || string.contains("sin") || string.contains("cos") ||
+                string.contains("tan") || string.contains("С") || string.contains("Ƥ") || string.contains("⁒") || string.contains("؉") ||
+                string.contains("%") || string.contains("Rec") || string.contains("Pol") || string.contains("RanInt(") || string.contains("Ran#");
     }
 
     /**
@@ -924,23 +941,21 @@ public class CalculatorEngine {
      * Recognized symbols include:
      *  - ¼ (One quarter)
      *  - ⅓ (One third)
-     *  - ½ (One half)
+     *  - ½ (One half) ...
      *  - e (Euler's number)
      *  - π (Pi)
      *
      * @param character The string to check.
      * @return true if the string is a recognized symbol, false otherwise.
      */
-    public static boolean isSymbol(final String character) {
-        return (String.valueOf(character).equals("¼") || String.valueOf(character).equals("⅓") || String.valueOf(character).equals("½") ||
-                String.valueOf(character).equals("⅕") || String.valueOf(character).equals("⅒") ||
-                String.valueOf(character).equals("е") || String.valueOf(character).equals("e") || String.valueOf(character).equals("π")) ||
-                String.valueOf(character).equals("A") || String.valueOf(character).equals("B") || String.valueOf(character).equals("C") ||
-                String.valueOf(character).equals("D") || String.valueOf(character).equals("E") || String.valueOf(character).equals("F") ||
-                String.valueOf(character).equals("G") || String.valueOf(character).equals("X") || String.valueOf(character).equals("Y") ||
-                String.valueOf(character).equals("Z");
-
-
+    public static boolean isSymbol(String character) {
+        return (character.equals("¼") || character.equals("⅓") || character.equals("½") ||
+                character.equals("⅕") || character.equals("⅒") ||
+                character.equals("е") || character.equals("e") || character.equals("π")) ||
+                character.equals("A") || character.equals("B") || character.equals("C") ||
+                character.equals("D") || character.equals("E") || character.equals("F") ||
+                character.equals("G") || character.equals("X") || character.equals("Y") ||
+                character.equals("Z");
     }
 
     /**

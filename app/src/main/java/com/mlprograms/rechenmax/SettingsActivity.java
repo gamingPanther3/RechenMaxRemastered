@@ -157,7 +157,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void changeLanguageToEnglish(MenuItem item) {
-        ToastHelper.showToastShort("Spanish is not available yet", getApplicationContext());
+        ToastHelper.showToastShort("English is not available yet", getApplicationContext());
         // TODO add language
         if(true) {
             return;

@@ -60,7 +60,7 @@ public class HistoryActivity extends AppCompatActivity {
         });
         dataManager = new DataManager(rechenMaxUI);
 
-        System.out.println(dataManager.getAllDataFromHistory(rechenMaxUI.getApplicationContext()));
+        //System.out.println(dataManager.getAllDataFromHistory(rechenMaxUI.getApplicationContext()));
 
         createTextViews();
 
@@ -93,7 +93,7 @@ public class HistoryActivity extends AppCompatActivity {
                         if (!tempDate.equals(date)) {
                             tempDate = date;
 
-                            history_layout.addView(createDateTextView(this, date), history_layout.getChildCount() - 1);
+                            history_layout.addView(createDateTextView(this, date), history_layout.getChildCount());
                         }
 
                         LinearLayout linearLayout = createCustomLayout(this, calculation, result);

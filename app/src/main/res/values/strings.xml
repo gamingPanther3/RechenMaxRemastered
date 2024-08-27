@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">RechenMax</string>
-    <string name="app_version_value" translatable="false">v3.01.0192</string>
-    <string name="app_version" translatable="false">Version - v3.01.0192</string>
+    <string name="app_version_value" translatable="false">v3.0.43</string>
+    <string name="app_version" translatable="false">Version - v3.0.43</string>
 
     <string name="result_text" translatable="false"></string> <!-- 1246,89 -->
     <string name="calculation_text" translatable="false"></string> <!-- 1253×52,4 -->

@@ -71,6 +71,7 @@ import java.util.Map;
 //  | allowRememberNotificationsActive | true / false                     | SettingsActivity                     |
 //  | allowDailyNotificationsActive    | true / false                     | SettingsActivity                     |
 //  | refactorPI                       | true / false                     | MainActivity                         |
+//  | historyAnimation                 | true / false                     | HistoryActivtiy                      |
 //  | historyMode                      | single / multiple                | MainActivity                         |
 //  | historyModeAdvanced              | true / false                     | MainActivity                         |
 //  | showConverterDevelopmentMessage  | true / false                     | ConvertActivity                      |
@@ -421,6 +422,7 @@ public class DataManager {
             initializeSetting("notificationSent", "false", applicationContext);
             initializeSetting("pressedCalculate", "false", applicationContext);
             initializeSetting("refactorPI", "false", applicationContext);
+            initializeSetting("historyAnimation", "true", applicationContext);
             initializeSetting("historyMode", "single", applicationContext);
             initializeSetting("historyModeAdvanced", "false", applicationContext);
             initializeSetting("dayPassed", "true", applicationContext);

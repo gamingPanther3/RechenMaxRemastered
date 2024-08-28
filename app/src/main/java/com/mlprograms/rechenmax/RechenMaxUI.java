@@ -1,13 +1,11 @@
 package com.mlprograms.rechenmax;
 
 import static com.mlprograms.rechenmax.CalculatorEngine.containsAnyVariable;
-import static com.mlprograms.rechenmax.CalculatorEngine.containsOperationCharacter;
 import static com.mlprograms.rechenmax.CalculatorEngine.fixExpression;
 import static com.mlprograms.rechenmax.CalculatorEngine.getVariables;
 import static com.mlprograms.rechenmax.CalculatorEngine.isFixExpression;
 import static com.mlprograms.rechenmax.CalculatorEngine.isNumber;
 import static com.mlprograms.rechenmax.CalculatorEngine.isOperator;
-import static com.mlprograms.rechenmax.CalculatorEngine.isSymbol;
 import static com.mlprograms.rechenmax.NumberHelper.PI;
 import static com.mlprograms.rechenmax.NumberHelper.e;
 import static com.mlprograms.rechenmax.ParenthesesBalancer.balanceParentheses;
@@ -66,13 +64,12 @@ import java.util.Locale;
 // TODO: insertPI
 // TODO: reminder
 // TODO: daily hints
-// TODO: fix expression
 
 public class RechenMaxUI extends AppCompatActivity {
 
     private boolean isFormatting;
 
-    Context rechenMaxUI = this;
+    public Context rechenMaxUI = this;
     private DataManager dataManager;
 
     private final LinearLayout[] scientificLayouts = new LinearLayout[10];
@@ -130,6 +127,8 @@ public class RechenMaxUI extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
 
         calculateScrollView = findViewById(R.id.calculation_horizontal_scroll_view);
         calculation_edittext = findViewById(R.id.calculation_edittext);
@@ -204,6 +203,10 @@ public class RechenMaxUI extends AppCompatActivity {
         formatCalculationText();
     }
 
+    public Context getApplicationContext() {
+        return rechenMaxUI;
+    }
+
     public void loadHistoryFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -222,16 +225,6 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dataManager.saveToJSONSettings("startApp", "true", getApplicationContext());
-    }
-
-    /**
-     * onPause method is called when the activity is paused.
-     * It starts the background service.
-     */
-    @Override
     protected void onPause() {
         super.onPause();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -239,10 +232,6 @@ public class RechenMaxUI extends AppCompatActivity {
         }
     }
 
-    /**
-     * onResume method is called when the activity is resumed.
-     * It stops the background service.
-     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -250,11 +239,6 @@ public class RechenMaxUI extends AppCompatActivity {
         formatCalculationText();
     }
 
-    /**
-     * This method stops the background service.
-     * It creates an intent to stop the BackgroundService and calls stopService() with that intent.
-     * This method is typically called when the activity is being destroyed or when it's no longer necessary to run the background service.
-     */
     private void stopBackgroundService() {
         try {
             Intent serviceIntent = new Intent(this, BackgroundService.class);
@@ -507,6 +491,7 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     public void openSettings(MenuItem item) {
+        SettingsActivity.setMainActivityContext(this);
         Intent intent = new Intent(RechenMaxUI.this, SettingsActivity.class);
         startActivity(intent);
     }
@@ -523,7 +508,6 @@ public class RechenMaxUI extends AppCompatActivity {
 
     public void openConverter(MenuItem item) {
         ConvertActivity.setMainActivityContext(this);
-
         Intent intent = new Intent(RechenMaxUI.this, ConvertActivity.class);
         startActivity(intent);
     }
@@ -572,18 +556,49 @@ public class RechenMaxUI extends AppCompatActivity {
             setCalculateText("");
         }
 
-        isFormatting = true;
-        calculateIfIsNotInvalidCalculation();
+        try {
+            // do not touch it too
+            if(s.equals("4") && Boolean.parseBoolean(dataManager.getJSONSettingsData("refactorPI", getApplicationContext()).getString("value"))) {
+                String beforePI = getCalculateText().substring(0, Math.max(editText.getSelectionStart() - 3, 0));
+                String afterPI = getCalculateText().substring(editText.getSelectionStart());
 
-        if(Character.isDigit(s.charAt(0)) && getCalculateText().endsWith(",")) {
-            formatCalculationText();
-            addCalculateText(",");
-            addCalculateText(s);
-        } else if(s.equals(",")) {
-            addCalculateText(",");
-        } else {
-            addCalculateText(s);
-            formatCalculationText();
+                if(getCalculateText().length() == 3 && getCalculateText().startsWith("3,1", editText.getSelectionStart() - 3)) { // 3,1    -> "4" wird angefügt
+                    setCalculateText(getString(R.string.pi));
+                    editText.setSelection(editText.length());
+                } else if(getCalculateText().length() > 3 && editText.getSelectionStart() >= 3) {
+                    //Log.e("DEBUG", "debug:" + getCalculateText().charAt(editText.getSelectionStart() - 3));
+
+                    if(getCalculateText().startsWith("3,1", editText.getSelectionStart() - 3) && !isNumber(String.valueOf(getCalculateText().charAt(editText.getSelectionStart() - 4)))) {
+                        int num = editText.getSelectionStart();
+                        setCalculateText(beforePI + getString(R.string.pi) + afterPI);
+                        editText.setSelection(Math.min(editText.length(), num + 3));
+                    } else {
+                        addCalculateText(s);
+                    }
+                } else {
+                    addCalculateText(s);
+                }
+
+                // setCalculateText(beforePI + getString(R.string.pi) + afterPI);
+                //Log.e("DEBUG", beforePI + getString(R.string.pi) + afterPI);
+                formatCalculationText();
+            } else {
+                isFormatting = true;
+                calculateIfIsNotInvalidCalculation();
+
+                if(Character.isDigit(s.charAt(0)) && getCalculateText().endsWith(",")) {
+                    formatCalculationText();
+                    //addCalculateText(",");
+                    addCalculateText(s);
+                } else if(s.equals(",")) {
+                    addCalculateText(",");
+                } else {
+                    addCalculateText(s);
+                    formatCalculationText();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         int count = Integer.parseInt(String.valueOf(fixExpressionWithCount(getCalculateText()).charAt(0)));
@@ -640,7 +655,7 @@ public class RechenMaxUI extends AppCompatActivity {
         String fixedExpression = stringBuilder.toString();
         fixedExpression = fixedExpression.replaceAll("-\\+", "-");
 
-        Log.e("fixExpression", "Fixed Expression: " + fixedExpression);
+        // Log.e("fixExpression", "Fixed Expression: " + fixedExpression);
         return stringBuilder.toString().isEmpty() ? appendedMultiply + input : appendedMultiply + fixedExpression;
     }
 
@@ -767,14 +782,17 @@ public class RechenMaxUI extends AppCompatActivity {
                 .replace("π", PI)
                 .replace("е", e)
         ;
-        int cursorPosition = calculation_edittext.getSelectionStart();
 
         if(isErrorMessage(calculateText) && !calculateText.isEmpty()) {
             return;
         }
-        if(cursorPosition == calculateText.length()) {
-            calculation_edittext.clearFocus();
+
+        EditText editText = findViewById(R.id.calculation_edittext);
+        if(!editText.isFocused()) {
+            editText.setSelection(editText.getText().length());
         }
+
+        int cursorPosition = editText.getSelectionStart() - 1;
 
         ArrayList<Integer> numberPositions = new ArrayList<>();
         for(int n = 0; n < calculateText.length(); n++) {
@@ -783,11 +801,7 @@ public class RechenMaxUI extends AppCompatActivity {
             }
         }
 
-
         if(numberPositions.contains(cursorPosition)) {
-            // hier muss die negierung hin
-            // also von "123" zu "(-123)
-
             int numberStart = cursorPosition;
             int numberEnd = cursorPosition;
 
@@ -807,10 +821,10 @@ public class RechenMaxUI extends AppCompatActivity {
                 }
             }
 
-            System.out.println("numberStart: " + numberStart);
-            System.out.println("numberEnd: " + numberEnd);
-            System.out.println("number: " + calculateText.substring(numberStart, numberEnd));
-            System.out.println("cursorPosition: " + cursorPosition);
+            //System.out.println("numberStart: " + numberStart);
+            //System.out.println("numberEnd: " + numberEnd);
+            //System.out.println("number: " + calculateText.substring(numberStart, numberEnd));
+            //System.out.println("cursorPosition: " + cursorPosition);
 
             String number = calculateText.substring(numberStart, numberEnd);
 
@@ -823,8 +837,8 @@ public class RechenMaxUI extends AppCompatActivity {
             }
 
             setCalculateText(calculateText);
-            calculation_edittext.setSelection(cursorPosition);
             formatCalculationText();
+            editText.setSelection(Math.min(cursorPosition + 1, editText.length()));
         }
 
         Log.e("DEBUG", "numberPositions: " + numberPositions);
@@ -903,6 +917,10 @@ public class RechenMaxUI extends AppCompatActivity {
     }
 
     private void addToHistory(String calculation, String result) {
+        if(isErrorMessage(calculation) || isErrorMessage(result)) {
+            return;
+        }
+
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd. MMMM yyyy", Locale.getDefault());
@@ -1363,30 +1381,7 @@ public class RechenMaxUI extends AppCompatActivity {
      * @return Returns true if the text is invalid (contains "Ungültige Eingabe", "Unendlich", "Syntax Fehler", or "Domainfehler" ...), and false otherwise.
      */
     public boolean isErrorMessage(String text) {
-        return  text.equals(getString(R.string.errorMessage1))  ||
-                text.equals(getString(R.string.errorMessage2))  ||
-                text.equals(getString(R.string.errorMessage3))  ||
-                text.equals(getString(R.string.errorMessage4))  ||
-                text.equals(getString(R.string.errorMessage5))  ||
-                text.equals(getString(R.string.errorMessage6))  ||
-                text.equals(getString(R.string.errorMessage7))  ||
-                text.equals(getString(R.string.errorMessage8))  ||
-                text.equals(getString(R.string.errorMessage9))  ||
-                text.equals(getString(R.string.errorMessage10)) ||
-                text.equals(getString(R.string.errorMessage11)) ||
-                text.equals(getString(R.string.errorMessage12)) ||
-                text.equals(getString(R.string.errorMessage13)) ||
-                text.equals(getString(R.string.errorMessage14)) ||
-                text.equals(getString(R.string.errorMessage15)) ||
-                text.equals(getString(R.string.errorMessage16)) ||
-                text.equals(getString(R.string.errorMessage17)) ||
-                text.equals(getString(R.string.errorMessage18)) ||
-                text.equals(getString(R.string.errorMessage19)) ||
-                text.equals(getString(R.string.errorMessage20)) ||
-                text.equals(getString(R.string.errorMessage21)) ||
-                text.equals(getString(R.string.errorMessage22)) ||
-
-                text.contains(getString(R.string.errorMessage1))  ||
+        return  text.contains(getString(R.string.errorMessage1))  ||
                 text.contains(getString(R.string.errorMessage2))  ||
                 text.contains(getString(R.string.errorMessage3))  ||
                 text.contains(getString(R.string.errorMessage4))  ||
@@ -1407,7 +1402,8 @@ public class RechenMaxUI extends AppCompatActivity {
                 text.contains(getString(R.string.errorMessage19)) ||
                 text.contains(getString(R.string.errorMessage20)) ||
                 text.contains(getString(R.string.errorMessage21)) ||
-                text.contains(getString(R.string.errorMessage22));
+                text.contains(getString(R.string.errorMessage22)) ||
+                text.contains("for");
     }
 
     /**
@@ -1472,4 +1468,5 @@ public class RechenMaxUI extends AppCompatActivity {
 
         editText.append(s);
     }
+
 }

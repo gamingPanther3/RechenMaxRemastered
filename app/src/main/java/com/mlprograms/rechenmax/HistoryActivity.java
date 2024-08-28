@@ -18,12 +18,16 @@ package com.mlprograms.rechenmax;
 
 import static com.mlprograms.rechenmax.ToastHelper.showToastShort;
 
+import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -33,6 +37,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -65,8 +70,67 @@ public class HistoryActivity extends AppCompatActivity {
         createTextViews();
 
         // scroll to bottom
-        NestedScrollView nestedScrollView = findViewById(R.id.historyUI);
-        ScrollUtils.smoothScrollToBottom(nestedScrollView, 1500, 1000);
+        try {
+            if(Boolean.parseBoolean(dataManager.getJSONSettingsData("historyAnimation", getMainActivityContext()).getString("value"))) {
+                NestedScrollView nestedScrollView = findViewById(R.id.historyUI);
+                ScrollUtils.smoothScrollToBottom(nestedScrollView, 1500, 1000);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * onPause method is called when the activity is paused.
+     * It starts the background service.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            startBackgroundService();
+        }
+    }
+
+    /**
+     * onResume method is called when the activity is resumed.
+     * It stops the background service.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        stopBackgroundService();
+    }
+
+    /**
+     * This method stops the background service.
+     * It creates an intent to stop the BackgroundService and calls stopService() with that intent.
+     * This method is typically called when the activity is being destroyed or when it's no longer necessary to run the background service.
+     */
+    private void stopBackgroundService() {
+        try {
+            Intent serviceIntent = new Intent(this, BackgroundService.class);
+            stopService(serviceIntent);
+        } catch (Exception e) {
+            Log.e("stopBackgroundService", e.toString());
+        }
+    }
+
+    /**
+     * This method starts a background service if the necessary permission is granted.
+     * It checks if the app has the required permission to post notifications.
+     * If the permission is granted, it starts the BackgroundService.
+     * This method is typically called when the window loses focus.
+     */
+    private void startBackgroundService() {
+        stopBackgroundService();
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                startService(new Intent(this, BackgroundService.class));
+            }
+        } catch (Exception e) {
+            Log.e("startBackgoundService", e.toString());
+        }
     }
 
     public void createTextViews() {
@@ -239,6 +303,14 @@ public class HistoryActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
         finish();
+    }
+
+    public static void setMainActivityContext(RechenMaxUI activity) {
+        rechenMaxUI = activity;
+    }
+
+    public static Context getMainActivityContext() {
+        return rechenMaxUI;
     }
 
 }

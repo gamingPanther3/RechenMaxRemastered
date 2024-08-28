@@ -23,6 +23,7 @@ import static ch.obermuhlner.math.big.DefaultBigDecimalMath.log10;
 import static ch.obermuhlner.math.big.DefaultBigDecimalMath.pow;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import org.json.JSONException;
 

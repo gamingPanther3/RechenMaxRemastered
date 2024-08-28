@@ -30,6 +30,7 @@ import static com.mlprograms.rechenmax.NotificationText.notificationHintsListFre
 import static com.mlprograms.rechenmax.NotificationText.notificationHintsListGerman;
 import static com.mlprograms.rechenmax.NotificationText.notificationHintsListSpanish;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -38,11 +39,14 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.text.format.DateFormat;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import org.json.JSONException;
 
@@ -138,11 +142,9 @@ public class BackgroundService extends Service {
     public void onCreate() {
         super.onCreate();
         sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        String allowNotification;
         String allowRememberNotifications;
         String allowDailyNotifications;
         try {
-            allowNotification = dataManager.getJSONSettingsData("allowNotification", getApplicationContext()).getString("value");
             allowRememberNotifications = dataManager.getJSONSettingsData("allowRememberNotifications", getApplicationContext()).getString("value");
             allowDailyNotifications = dataManager.getJSONSettingsData("allowDailyNotifications", getApplicationContext()).getString("value");
         } catch (JSONException e) {
@@ -151,9 +153,7 @@ public class BackgroundService extends Service {
 
         // dataManager.saveToJSONSettings("notificationSent", false, this);
         // dataManager.saveToJSONSettings("dayPassed", true, this);
-
-        if ("true".equals(allowNotification) &&
-                (("true".equals(allowRememberNotifications) || "true".equals(allowDailyNotifications)))) {
+        if ("true".equals(allowRememberNotifications) || "true".equals(allowDailyNotifications)) {
             //dataManager.saveToJSONSettings("notificationSent", false, this);
 
             createNotificationChannel(this);
@@ -170,18 +170,16 @@ public class BackgroundService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String allowNotification;
         String allowRememberNotifications;
         String allowDailyNotifications;
         try {
-            allowNotification = dataManager.getJSONSettingsData("allowNotification", getApplicationContext()).getString("value");
             allowRememberNotifications = dataManager.getJSONSettingsData("allowRememberNotifications", getApplicationContext()).getString("value");
             allowDailyNotifications = dataManager.getJSONSettingsData("allowDailyNotifications", getApplicationContext()).getString("value");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
-        if ("true".equals(allowNotification) && (("true".equals(allowRememberNotifications) || "true".equals(allowDailyNotifications)))) {
+        if ("true".equals(allowRememberNotifications) || "true".equals(allowDailyNotifications)) {
             Log.d(CHANNEL_NAME_BACKGROUND, "Service started");
 
             boolean startedByBootReceiver = intent != null && intent.getBooleanExtra("started_by_boot_receiver", false);
@@ -344,26 +342,24 @@ public class BackgroundService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         String contentTitle;
-        String contentText;
-
-        switch (language) {
-            case "English":
+        String contentText = switch (language) {
+            case "English" -> {
                 contentTitle = "RechenMax in the background";
-                contentText = "RechenMax is now active in the background.";
-                break;
-            case "français":
+                yield "RechenMax is now active in the background.";
+            }
+            case "français" -> {
                 contentTitle = "RechenMax en arrière-plan";
-                contentText = "RechenMax est maintenant actif en arrière-plan.";
-                break;
-            case "español":
+                yield "RechenMax est maintenant actif en arrière-plan.";
+            }
+            case "español" -> {
                 contentTitle = "RechenMax en segundo plano";
-                contentText = "RechenMax está ahora activo en segundo plano.";
-                break;
-            default:
+                yield "RechenMax está ahora activo en segundo plano.";
+            }
+            default -> {
                 contentTitle = "RechenMax im Hintergrund";
-                contentText = "RechenMax ist nun im Hintergrund aktiv.";
-                break;
-        }
+                yield "RechenMax ist nun im Hintergrund aktiv.";
+            }
+        };
 
         return builder.setContentTitle(contentTitle)
                 .setContentText(contentText)

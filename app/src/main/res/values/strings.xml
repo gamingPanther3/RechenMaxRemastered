@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">RechenMax</string>
-    <string name="app_version_value" translatable="false">v3.0.43</string>
-    <string name="app_version" translatable="false">Version - v3.0.43</string>
+    <string name="app_version_value" translatable="false">v3.0.45</string>
+    <string name="app_version" translatable="false">Version - v3.0.45</string>
 
     <string name="result_text" translatable="false"></string> <!-- 1246,89 -->
     <string name="calculation_text" translatable="false"></string> <!-- 1253×52,4 -->
@@ -359,8 +359,8 @@
     <string name="tooltip_sine">Sinus (sin(x))</string>
     <string name="tooltip_cosine">Cosinus (cos(x))</string>
     <string name="tooltip_tangent">Tangens (tan(x))</string>
-    <string name="tooltip_permutation">Permutation (49Ƥ6)</string>
-    <string name="tooltip_combination">Kombination (49С6)</string>
+    <string name="tooltip_permutation">Permutation (xƤy)</string>
+    <string name="tooltip_combination">Kombination (xСy)</string>
     <string name="tooltip_a_sine">Arkussinus (sin⁻¹(x))</string>
     <string name="tooltip_a_cosine">Arkuscosinus (cos⁻¹(x))</string>
     <string name="tooltip_a_tangent">Arkustangens (tan⁻¹(x))</string>
@@ -493,8 +493,11 @@
     <string name="settings_language_config_spanish">Spanisch</string>
     <string name="settings_language_config_french">Französisch</string>
     <string name="settings_insert_pi_set_to">PI wird</string>
-    <string name="settings_insert_pi_insert">eingefügt</string>
-    <string name="settings_insert_pi_not_insert">nicht eingefügt</string>
+    <string name="settings_do_insert_pi">eingefügt</string>
+    <string name="settings_do_not_insert_pi">nicht eingefügt</string>
+    <string name="settings_history_animation_message">Die Verlaufs-Animation wird</string>
+    <string name="settings_play_history_animation">abgespielt</string>
+    <string name="settings_do_not_play_history_animation">nicht abgespielt</string>
     <string name="settings_daily_hints_notification_set_to">Tägliche Tipps werden</string>
     <string name="settings_daily_hints_notification_send">gesendet</string>
     <string name="settings_daily_hints_notification_do_not_send">nicht gesendet</string>
@@ -502,6 +505,10 @@
     <string name="settings_remember_notification_send">gesendet</string>
     <string name="settings_remember_notification_do_not_send">nicht gesendet</string>
     <string name="settings_decimal_points_set_to">Anzahl der Nachkommastellen beträgt nun:</string>
+
+    <string name="settings_history_animation">Verlauf Animation</string>
+    <string name="settings_history_animation_description">Schalte die Scroll-Animation im Verlauf ein oder aus, die direkt nach dem Aufrufen des Verlaufs startet.</string>
+
 
     <string name="changelog_title">Changelog</string>
     <string name="changelog_general">Neue Funkionen</string>
@@ -514,7 +521,11 @@
     <string name="changelog_history">Verlauf</string>
     <string name="changelog_history_description">Alte Berchnungen können nun an in dem neuen Verlauf aufgerufen werden.</string>
     <string name="changelog_converter">Umrechner</string>
-    <string name="changelog_converter_description">Einheiten können extrem leicht in dem Umrechner umgewandelt.</string>
+    <string name="changelog_converter_description">Einheiten können extrem leicht in dem Umrechner umgewandelt werden.</string>
+    <string name="changelog_notifications">Benachrichtigungen</string>
+    <string name="changelog_notifications_description">Es werden, wenn die Einstellung aktiviert ist, von dem Taschenrechner nützliche Benachrichtigungen gesendet.</string>
+    <string name="changelog_settings">Einstellungen</string>
+    <string name="changelog_settings_description">Mit den Einstellungen kann man sich den Taschenrechner individuell anpassen.</string>
 
     <string name="actionbar_history">Verlauf aufrufen</string>
     <string name="tooltip_returnToCalculatorUI">Zurück zum Taschenrechner</string>

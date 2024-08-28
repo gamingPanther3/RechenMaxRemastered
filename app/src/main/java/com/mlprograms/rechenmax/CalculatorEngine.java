@@ -23,7 +23,6 @@ import static ch.obermuhlner.math.big.DefaultBigDecimalMath.log10;
 import static ch.obermuhlner.math.big.DefaultBigDecimalMath.pow;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import org.json.JSONException;
 
@@ -61,9 +60,9 @@ public class CalculatorEngine {
         rechenmaxUI = activity;
     }
 
-    private static MathContext MC;
+    private static MathContext MC = new MathContext(10, RoundingMode.HALF_UP);
     public static int RESULT_LENGTH;
-    public static String CALCULATION_MODE;
+    public static String CALCULATION_MODE = "Deg";
 
     // Declaration of a constant for the root operation.
     public static final String  ROOT            = "√";
@@ -240,7 +239,7 @@ public class CalculatorEngine {
         // Remove all spaces from the expression
         String expressionWithoutSpaces = expression.replaceAll("\\s+", "");
 
-        List<String> tokens = new ArrayList<>();
+        List<String>  tokens = new ArrayList<>();
         StringBuilder currentToken = new StringBuilder();
 
         for (int i = 0; i < expressionWithoutSpaces.length(); i++) {
@@ -293,7 +292,7 @@ public class CalculatorEngine {
                     }
                     if (function.equals("log₂(") || function.equals("log₃(") || function.equals("log₄(") ||
                             function.equals("log₅(") || function.equals("log₆(") || function.equals("log₇(") ||
-                            function.equals("log₈(") || function.equals("log₉(") || (function.startsWith("log") && function.endsWith("("))) {
+                            function.equals("log₈(") || function.equals("log₉(")) {
                         tokens.add(function); // Add the full function name
                         i += 4; // Skip the next characters (already processed)
                         continue;
@@ -735,7 +734,7 @@ public class CalculatorEngine {
                 stringBuilder.append(currentChar);
                 //Log.e("fixExpression", "CurrentChar: " + currentChar + " NextChar: " + nextChar);
                 //Log.e("fixExpression", "stringBuilder: " + stringBuilder);
-                
+
                 if (!nextChar.isEmpty() && isFixExpression(currentChar, nextChar)) {
                     stringBuilder.append('×');
                 }

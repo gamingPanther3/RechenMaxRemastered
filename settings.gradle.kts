@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "RechenMax Remastered"
 include(":app")
+include(":app:benchmark")

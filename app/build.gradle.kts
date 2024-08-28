@@ -10,8 +10,8 @@ android {
         applicationId = "com.mlprograms.rechenmax"
         minSdk = 29
         targetSdk = 34
-        versionCode = 109
-        versionName = "3.0.45"
+        versionCode = 110
+        versionName = "3.0.47"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,6 +23,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
         }
     }
     compileOptions {
@@ -49,6 +55,7 @@ dependencies {
     implementation(libs.app.update)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
 
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

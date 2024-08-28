@@ -60,10 +60,7 @@ import java.util.Locale;
 
 // force push to RechenMax Repo:
 // git push --force --set-upstream https://github.com/gamingPanther3/RechenMax master
-
-// TODO: insertPI
-// TODO: reminder
-// TODO: daily hints
+// git push --force --set-upstream https://github.com/gamingPanther3/RechenMaxRemastered master
 
 public class RechenMaxUI extends AppCompatActivity {
 
@@ -127,8 +124,6 @@ public class RechenMaxUI extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
 
         calculateScrollView = findViewById(R.id.calculation_horizontal_scroll_view);
         calculation_edittext = findViewById(R.id.calculation_edittext);

@@ -2,15 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="Manifest.permission.SEND_NOTIFICATIONS"/>
-    <uses-permission android:name="Manifest.permission.NOTIFICATION_SEND"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="Manifest.permission.SEND_NOTIFICATIONS" />
+    <uses-permission android:name="Manifest.permission.NOTIFICATION_SEND" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application
         android:allowBackup="true"
@@ -22,59 +22,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RechenMaxRemastered"
         tools:targetApi="34">
+        <profileable android:shell="true" />
 
         <activity
             android:name=".RechenMaxUI"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".AboutActivity"
             android:configChanges="locale|uiMode"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".SettingsActivity"
             android:configChanges="locale|uiMode"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".ChangelogActivity"
             android:configChanges="locale|uiMode"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".ConvertActivity"
             android:configChanges="locale|uiMode"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:name=".HistoryActivity"
             android:configChanges="locale|uiMode"
-            android:exported="false">
-        </activity>
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
 
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="specialUse"/>
-        <!-- specialUse was taken because otherwise the app would close and no longer send notifications (no special purpose) -->
-
+            android:foregroundServiceType="specialUse" /> <!-- specialUse was taken because otherwise the app would close and no longer send notifications (no special purpose) -->
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -85,6 +74,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-
     </application>
+
 </manifest>

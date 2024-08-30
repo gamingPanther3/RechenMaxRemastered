@@ -60,19 +60,10 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="0.5"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="6dp"
-                app:strokeWidth="0dp" />
-
-            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/actionbar_history_card"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3.5"
+                android:layout_weight="5"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="6dp"
                 app:strokeWidth="0dp">
@@ -96,14 +87,19 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="6dp"
-                app:strokeWidth="0dp" />
+            <TextView
+                android:id="@+id/actionbar_menu_active_voice_control"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha="0.45"
+                android:fontFamily="@font/quicksand_regular"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:tooltipText="@string/actionbar_menu_voice_control"
+                android:onClick="startVoiceControl"
+                app:drawableStartCompat="@drawable/baseline_keyboard_voice_24_off" />
+
 
             <TextView
                 android:id="@+id/actionbar_menu_textview"

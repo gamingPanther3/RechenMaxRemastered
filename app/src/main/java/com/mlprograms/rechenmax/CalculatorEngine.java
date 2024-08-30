@@ -765,7 +765,7 @@ public class CalculatorEngine {
 
     static boolean containsOperationCharacter(char s) {
         char[] list = {'l', 'o', 'g', 's', 'i', 'n', 'h', 'c', 't', '#', 'r', '⁻', '¹', 'p', 'e',
-                'a', 'b', 'd', 'f', 'x', 'y', 'z',
+                'a', 'b', 'd', 'f', 'x', 'y', 'z', '½', '⅓', '¼', '⅕', '⅒',
                 '₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'
         };
 

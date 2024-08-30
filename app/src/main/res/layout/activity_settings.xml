@@ -142,6 +142,38 @@
             android:textSize="@dimen/settings_text_description"
             android:layout_marginHorizontal="15dp"/>
 
+        <!--
+
+        <TextView
+            android:id="@+id/settings_speech_recognition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorButtonVeryHigh"
+            android:text="@string/settings_allow_speech_recognition_to_self_restart"
+            app:layout_constraintTop_toBottomOf="@+id/settings_history_animation_description"
+            app:drawableLeftCompat="@drawable/baseline_record_voice_over_24"
+            android:drawablePadding="20dp"
+            android:paddingVertical="12dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/app_menu_title_size"
+            android:layout_marginHorizontal="15dp"
+            android:onClick="openSettingsSpeechRecognition"/>
+
+        <TextView
+            android:id="@+id/settings_speech_recognition_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/coloNearlyWhite"
+            android:text="@string/settings_allow_speech_recognition_to_self_restart_description"
+            app:layout_constraintTop_toBottomOf="@+id/settings_speech_recognition"
+            android:paddingVertical="1dp"
+            android:paddingHorizontal="5dp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/settings_text_description"
+            android:layout_marginHorizontal="15dp"/>
+
+        -->
+
         <View
             android:id="@+id/category_seperator_1"
             android:layout_width="match_parent"

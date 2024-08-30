@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -127,6 +128,21 @@ public class SettingsActivity extends AppCompatActivity {
         ToastHelper.showToastShort(
                 getString(R.string.settings_history_animation_message) + " " +
                         (!oldValue ? getString(R.string.settings_play_history_animation) : getString(R.string.settings_do_not_play_history_animation))
+                , getMainActivityContext()
+        );
+    }
+
+    public void openSettingsSpeechRecognition(View view) {
+        try {
+            oldValue = Boolean.parseBoolean(dataManager.getJSONSettingsData("speech_recognition", getMainActivityContext()).getString("value"));
+        } catch (JSONException e) {
+            oldValue = false;
+        }
+        dataManager.updateValuesInJSONSettingsData("speech_recognition", "value", String.valueOf(!oldValue), getMainActivityContext());
+
+        ToastHelper.showToastShort(
+                getString(R.string.settings_speech_recognition_message) + " " +
+                        (!oldValue ? getString(R.string.settings_speech_recognition_on) : getString(R.string.settings_speech_recognition_off))
                 , getMainActivityContext()
         );
     }

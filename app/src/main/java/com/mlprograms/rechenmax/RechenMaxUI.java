@@ -24,9 +24,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -42,8 +46,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -56,7 +62,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 // force push to RechenMax Repo:
 // git push --force --set-upstream https://github.com/gamingPanther3/RechenMax master
@@ -64,7 +72,10 @@ import java.util.Locale;
 
 public class RechenMaxUI extends AppCompatActivity {
 
+    private Map<String, Integer> replacements = VariableHelper.replacements;
+
     private boolean isFormatting;
+    private boolean isListeningToVoice = false;
 
     public Context rechenMaxUI = this;
     private DataManager dataManager;
@@ -82,6 +93,12 @@ public class RechenMaxUI extends AppCompatActivity {
     private HorizontalScrollView calculateScrollView;
     private HorizontalScrollView resultScrollView;
     private TextView resultTextview;
+
+    public static final Integer RecordAudioRequestCode = 1;
+
+    private StringBuilder voiceInputString = new StringBuilder();
+    private SpeechRecognizer speechRecognizer;
+    private Intent speechRecognizerIntent;
 
     private final String hexColorErrorMessageRed = "#F05F5D";
     private final String hexColorDefaultTextWhite = "#FFFFFF";
@@ -150,7 +167,6 @@ public class RechenMaxUI extends AppCompatActivity {
         CalculatorEngine.setRechenMaxUI(this);
 
         clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        // TODO: inAppUpdate = new InAppUpdate(this);
 
         try {
             isExpanded = dataManager.getJSONSettingsData("showScienceRow", getApplicationContext()).getBoolean("value");
@@ -185,9 +201,9 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         try {
-            if(dataManager.getJSONSettingsData("startApp", getApplicationContext()).getString("value").equals("true")) {
+            if (dataManager.getJSONSettingsData("startApp", getApplicationContext()).getString("value").equals("true")) {
                 String savedLocale = dataManager.getJSONSettingsData("appLanguage", getApplicationContext()).getString("value");
-                if(!getLocale().equals(savedLocale)) {
+                if (!getLocale().equals(savedLocale)) {
                     setLocale(this, savedLocale);
                 }
             }
@@ -196,6 +212,163 @@ public class RechenMaxUI extends AppCompatActivity {
         }
 
         formatCalculationText();
+        isListeningToVoice = false;
+        updateListenToVoiceSymbol();
+
+        // TODO: speech recognition
+        initializeSpeechRecognizer();
+    }
+
+    private void initializeSpeechRecognizer() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
+        speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+                // TODO: better message
+                System.out.println("Listening...");
+
+                isListeningToVoice = true;
+                updateListenToVoiceSymbol();
+            }
+
+            @Override
+            public void onRmsChanged(float v) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] bytes) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                // TODO: better message
+                System.out.println("Stopped listening...");
+
+                isListeningToVoice = false;
+                updateListenToVoiceSymbol();
+            }
+
+            @Override
+            public void onError(int i) {
+                if (isListeningToVoice) {
+                    speechRecognizer.stopListening();
+                }
+                updateListenToVoiceSymbol();
+            }
+
+            @Override
+            public void onResults(Bundle bundle) {
+                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                voiceInputString.delete(0, voiceInputString.length());
+
+                assert data != null;
+                voiceInputString.append(data.get(0));
+
+                isListeningToVoice = false;
+                updateListenToVoiceSymbol();
+
+                // TODO: get message on finish
+                Log.e("DEBUG", "Erkannter Text (onResult):" + voiceInputString.toString());
+
+                addVoiceStringToCalculationAsync(voiceInputString.toString());
+            }
+
+            @Override
+            public void onPartialResults(Bundle bundle) {
+                ArrayList<String> partialResults = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                if (partialResults != null && !partialResults.isEmpty()) {
+                    String recognizedText = partialResults.get(0);
+
+                    // Verarbeite den erkannten Text hier
+                    Log.d("PartialResult", "Vorläufig erkannter Text: " + recognizedText);
+
+                    // Optional: Zeige die Teilresultate im UI an oder reagiere darauf
+                    if(!recognizedText.isBlank()) {
+                        addVoiceStringToCalculationAsync(recognizedText);
+                    }
+                }
+            }
+
+            @Override
+            public void onEvent(int i, Bundle bundle) {
+
+            }
+        });
+    }
+
+    public void addVoiceStringToCalculationAsync(final String s) {
+        new Thread(() -> {
+            String text = s;
+
+            text = text.toLowerCase().replace(" ", "");
+
+            for (Map.Entry<String, Integer> entry : replacements.entrySet()) {
+                text = text.replace(entry.getKey(), getString(entry.getValue()));
+            }
+
+            String finalText = text;
+            calculation_edittext.post(() -> {
+                setCalculateTextForce(balanceParentheses(fixExpression(finalText)));
+                calculation_edittext.setSelection(calculation_edittext.length());
+            });
+        }).start();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == RecordAudioRequestCode && grantResults.length > 0 ){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ToastHelper.showToastShort("Permission Granted", this);
+        }
+    }
+
+    public void startVoiceControl(View v) {
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, RecordAudioRequestCode);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if(!SpeechRecognizer.isOnDeviceRecognitionAvailable(this)) {
+                ToastHelper.showToastLong(getString(R.string.speech_recognition_is_not_available), this);
+                return;
+            }
+        } else {
+            ToastHelper.showToastLong(getString(R.string.api_level_speech_recognition_is_not_available), this);
+            return;
+        }
+
+        if(isListeningToVoice) {
+            if(!voiceInputString.toString().isEmpty()) {
+                voiceInputString = voiceInputString.delete(0, voiceInputString.length());
+
+                // TODO: get message falls eher abgebrochen
+            }
+            speechRecognizer.stopListening();
+            isListeningToVoice = false;
+
+            Log.e ("DEBUG", "Erkannter Text (canceled):" + voiceInputString);
+        } else {
+            speechRecognizer.startListening(speechRecognizerIntent);
+            isListeningToVoice = true;
+        }
+
+        updateListenToVoiceSymbol();
     }
 
     public Context getApplicationContext() {
@@ -219,9 +392,25 @@ public class RechenMaxUI extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
     }
 
+    private void updateListenToVoiceSymbol() {
+        TextView textView = findViewById(R.id.actionbar_menu_active_voice_control);
+
+        Drawable on = getResources().getDrawable(R.drawable.baseline_keyboard_voice_24_on);
+        Drawable off = getResources().getDrawable(R.drawable.baseline_keyboard_voice_24_off);
+
+        textView.setCompoundDrawablesWithIntrinsicBounds(isListeningToVoice ? on : off, null, null, null);
+        textView.setAlpha((float) (isListeningToVoice ? 0.9 : 0.45));
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
+
+        isListeningToVoice = false;
+        if (speechRecognizer != null) {
+            speechRecognizer.destroy();
+        }
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             startBackgroundService();
         }
@@ -1449,6 +1638,15 @@ public class RechenMaxUI extends AppCompatActivity {
             calculation_edittext.setSelection(getCalculateText().length());
         }
     }
+
+    public void setCalculateTextForce(final String s) {
+        if(findViewById(R.id.calculation_edittext) != null) {
+            EditText calculatetext = findViewById(R.id.calculation_edittext);
+            calculatetext.setText(s);
+            calculation_edittext.setSelection(calculation_edittext.length());
+        }
+    }
+
     public void addCalculateText(final String s) {
         EditText editText = findViewById(R.id.calculation_edittext);
         calculation_edittext.setTextColor(Color.parseColor(hexColorDefaultTextWhite));

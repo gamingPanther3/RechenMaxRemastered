@@ -76,6 +76,7 @@ import java.util.Map;
 //  | historyModeAdvanced              | true / false                     | MainActivity                         |
 //  | showConverterDevelopmentMessage  | true / false                     | ConvertActivity                      |
 //  | startApp                         | true / false                     | MainActivity                         |
+//  | speech_recognition               | true / false                     | MainActivity                         |
 //  | report                           | 'name' of person
 //                                       'title' of bug
 //                                       'text' (description) of bug      | ConvertActivity                      |
@@ -434,6 +435,7 @@ public class DataManager {
             initializeSetting("calculationCount", "1", applicationContext);
             initializeSetting("maxNumbersWithoutScrolling", "6", applicationContext);
             initializeSetting("startApp", "true", applicationContext);
+            initializeSetting("speech_recognition", "false", applicationContext);
 
             initializeSetting("variable_a", "", applicationContext);
             initializeSetting("variable_b", "", applicationContext);

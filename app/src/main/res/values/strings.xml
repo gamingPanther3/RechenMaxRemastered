@@ -43,6 +43,8 @@
     <string name="rectangular_to_polar" translatable="false">Pol</string>
     <string name="polar_to_rectangular" translatable="false">Rec</string>
     <string name="add_parentheses" translatable="false">( )</string>
+    <string name="add_parentheses_on" translatable="false">(</string>
+    <string name="add_parentheses_off" translatable="false">)</string>
     <string name="factorial" translatable="false">x!</string>
     <string name="power" translatable="false">^</string>
     <string name="square_root" translatable="false">√x</string>
@@ -173,6 +175,9 @@
 
 
     <!-- Später übersetzen -->
+
+    <string name="api_level_speech_recognition_is_not_available">Spracherkennung ist für deine Android-Version nichg verfügbar</string>
+    <string name="speech_recognition_is_not_available">Spracherkennung ist gerade nicht verfügbar</string>
 
     <string name="converter">Umrechner</string>
     <string name="openConverter">Umrechner öffnen</string>
@@ -414,6 +419,7 @@
     <string name="actionbar_menu_clear_history">Verlauf leeren</string>
     <string name="actionbar_menu_help">Hilfe</string>
     <string name="actionbar_menu_about">Über</string>
+    <string name="actionbar_menu_voice_control">Sprachsteuerung</string>
     <string name="actionbar_menu_change_variables">Variablen definieren</string>
     <string name="actionbar_function_is_not_available">Diese Funktion ist noch nicht verfügbar</string>
 
@@ -483,6 +489,11 @@
     <string name="settings_reminder_description">Erhalten Sie Benachrichtigungen, um den Taschenrechner regelmäßig zu nutzen.</string>
     <string name="settings_daily_hints">Tägliche Tipps</string>
     <string name="settings_daily_hints_description">Erhalten Sie täglich nützliche Tipps zur optimalen Nutzung des Taschenrechners.</string>
+    <string name="speech_recognition_changelog_description">Berechnungen können jetzt auch per Sprachbefehl eingegeben werden</string>
+
+    <string name="settings_allow_speech_recognition_to_self_restart">Zuhören</string>
+    <string name="settings_allow_speech_recognition_to_self_restart_description">Erlaube der Spracherkennung, kontinuierlich auf das Mikrofon zuzugreifen, solange es eingeschaltet ist.</string>
+
     <string name="about_no_email_client">Es ist kein E-Mail-Client installiert. (Email-Adresse kopiert)</string>
     <string name="variable_is_not_defined">Variable ist nicht definiert</string>
     <string name="variable_is_now_defined">Variable ist nun definiert (\'</string>
@@ -496,6 +507,10 @@
     <string name="settings_do_insert_pi">eingefügt</string>
     <string name="settings_do_not_insert_pi">nicht eingefügt</string>
     <string name="settings_history_animation_message">Die Verlaufs-Animation wird</string>
+    <string name="settings_speech_recognition_message">Spracherkennung hört</string>
+    <string name="settings_speech_recognition_off">bei Aktivierung nicht dauerhaft zu</string>
+    <string name="settings_speech_recognition_on">bei Aktivierung dauerhaft zu</string>
+
     <string name="settings_play_history_animation">abgespielt</string>
     <string name="settings_do_not_play_history_animation">nicht abgespielt</string>
     <string name="settings_daily_hints_notification_set_to">Tägliche Tipps werden</string>
@@ -508,7 +523,6 @@
 
     <string name="settings_history_animation">Verlauf Animation</string>
     <string name="settings_history_animation_description">Schalte die Scroll-Animation im Verlauf ein oder aus, die direkt nach dem Aufrufen des Verlaufs startet.</string>
-
 
     <string name="changelog_title">Changelog</string>
     <string name="changelog_general">Neue Funkionen</string>

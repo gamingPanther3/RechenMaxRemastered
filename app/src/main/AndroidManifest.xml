@@ -11,6 +11,8 @@
     <uses-permission android:name="Manifest.permission.SEND_NOTIFICATIONS" />
     <uses-permission android:name="Manifest.permission.NOTIFICATION_SEND" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
         android:allowBackup="true"
@@ -33,37 +35,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:configChanges="locale|uiMode"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+
         <activity
             android:name=".SettingsActivity"
             android:configChanges="locale|uiMode"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+
         <activity
             android:name=".ChangelogActivity"
             android:configChanges="locale|uiMode"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+
         <activity
             android:name=".ConvertActivity"
             android:configChanges="locale|uiMode"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
+
         <activity
             android:name=".HistoryActivity"
             android:configChanges="locale|uiMode"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
 
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="specialUse" /> <!-- specialUse was taken because otherwise the app would close and no longer send notifications (no special purpose) -->
+
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -74,6 +87,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
